@@ -119,7 +119,7 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\GLEW\include;$(SolutionDir)include\GLFW\include;$(SolutionDir)include\GLM\include;$(SolutionDir)include\ImGui;$(SolutionDir)include\STB;$(SolutionDir)include\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\GLEW\include;$(SolutionDir)include\GLFW\include;$(SolutionDir)include\GLM\include;$(SolutionDir)include\STB;$(SolutionDir)include\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
