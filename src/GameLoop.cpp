@@ -2,22 +2,32 @@
 
 void GameLoop::Init()
 {
+	deltaTime = 0.0f;
+
 	window = new Window(glm::uvec2(1024, 1024), "Window");
-	grid = new Grid(11);
 
-	grid->AddBlock(glm::vec2(4, 4), 2);
-	grid->AddBlock(glm::vec2(1, 4), 2);
-	grid->AddBlock(glm::vec2(10, 5), 2);
-	grid->AddBlock(glm::vec2(6, 8), 2);
-	grid->AddBlock(glm::vec2(0, 9), 2);
-	grid->AddBlock(glm::vec2(5, 2), 2);
-	grid->AddBlock(glm::vec2(7, 7), 2);
+	int size = 8;
 
-	text = new Text("Hello World");
+	grid = new Grid(size);
+
+	for (int x = 0; x < size; x++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			grid->AddBlock(glm::vec2(x, y), 2);
+		}
+	}
+
+	scoreDisplay = new Text("Score: ");
+	scoreDisplay->position = glm::vec2(300, 950);
+
+	fpsDisplay = new FPSDisplay(glm::vec2(800, 950), 1.0f);
 }
 void GameLoop::Update()
 {
 	window->PollEvents();
+
+	fpsDisplay->UpdateDT();
 
 	// If pressed W/Up Arrow
 	if (Input::Clicked(Up))	
@@ -42,12 +52,14 @@ void GameLoop::Render()
 {
 	window->Clear(glm::vec4(0.3f, 0.3f, 0.4f, 1.0f));
 
-	//grid->Render();
+	grid->Render();
 
-	//for (auto& block : grid->blocks)
-		//block.Render();
-  
-	text->Render("Hello World!", 25.0f, 25.0f);
+	for (auto& block : grid->blocks)
+		block.Render();
+
+	scoreDisplay->Render();
+
+	fpsDisplay->RenderFPS();
 
 	window->Display();
 }

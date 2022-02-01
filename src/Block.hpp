@@ -4,6 +4,7 @@
 #define BLOCK_HPP
 
 #include "Sprite.hpp"
+#include "Text.hpp"
 
 class Block
 {
@@ -18,9 +19,13 @@ public:
 
 	int value;
 
+	bool deleteQueued;
+
 	glm::ivec2 gridPos;
 
-	Block(glm::ivec2 pos, const float& gridOffset, unsigned int val);
+	Text* valueText;
+
+	Block(glm::ivec2 pos, const float& gridOffset, int val);
 	~Block();
 };
 

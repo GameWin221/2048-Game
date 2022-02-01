@@ -37,8 +37,7 @@ Sprite::Sprite(Texture* tex, glm::vec2 pos, glm::vec2 siz, glm::vec3 col)
     }
 
 
-    this->texture = tex;
-
+    this->texture  = tex;
     this->position = pos;
     this->color    = col;
     this->size     = siz;

@@ -20,9 +20,14 @@ Window::Window(glm::uvec2 size, std::string name)
 	glewInit();
 	glewExperimental = true;
 
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
+	glFrontFace(GL_CW);
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glfwSwapInterval(1);
 
 	glViewport(0, 0, size.x, size.y);
 	glfwSetFramebufferSizeCallback(glfwWindow, framebuffer_size_callback);

@@ -138,24 +138,35 @@ void Grid::MoveBlocks(Direction dir)
 
 			// Check if the block won't collide with other
 			for (auto& checkedBlock : this->blocks)
-				// If collided
-				if (checkedBlock.gridPos == newPos)
+			{
+				// If collided with a block that isn't queued to delete
+				if (checkedBlock.gridPos == newPos && !checkedBlock.deleteQueued)
 				{
 					isOccupied = true;
 
+					// Check if the block can merge with the checkedBlock
 					if (checkedBlock.value == block.value)
 					{
 						checkedBlock.Promote();
-						// DODAC USUWANIE PO ZDERZENIU
+						block.deleteQueued = true;
 					}
+					break;
 				}
-
+			}
 
 			// Move the block if possible
 			if (!isOccupied)
 				block.gridPos = newPos;
 		}
 	}
+
+	// Delete blocks marked as Deleted
+	for (int i = 0; i < this->blocks.size(); i++)
+	{
+		if (this->blocks[i].deleteQueued)
+			this->blocks.erase(this->blocks.begin() + i);
+	}
+	
 }
 
 void Grid::AddBlock(glm::vec2 spawnPos, int spawnValue)

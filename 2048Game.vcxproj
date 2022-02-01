@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="include\STB\stb_image.cpp" />
     <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\FPSDisplay.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\Input.cpp" />
@@ -169,6 +170,7 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\FPSDisplay.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\Direction.hpp" />
     <ClInclude Include="src\GameLoop.hpp" />
