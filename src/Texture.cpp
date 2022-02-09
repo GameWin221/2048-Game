@@ -8,6 +8,8 @@ void Texture::Use(unsigned int textureID)
 
 Texture::Texture(std::string name)
 {
+	this->tiling = glm::vec2(1.0f);
+
 	stbi_set_flip_vertically_on_load(true);
 
 	unsigned char* data = stbi_load(name.c_str(), &this->size.x, &this->size.y, &this->nrChannels, 0);
@@ -26,7 +28,6 @@ Texture::Texture(std::string name)
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
-	
 		std::cout << "Failed to load texture" << std::endl;
 	
 	stbi_image_free(data);

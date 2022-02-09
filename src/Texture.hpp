@@ -22,6 +22,7 @@ private:
 
 public:
 	glm::ivec2 size;
+	glm::vec2 tiling;
 
 	void Use(unsigned int textureID);
 

@@ -7,8 +7,9 @@ in vec2 texcoord;
 uniform vec3 color;
 
 uniform sampler2D mainTexture;
+uniform vec2 textureTiling;
 
 void main()
 {
-	FragColor = texture(mainTexture, texcoord) * vec4(color, 1.0f);
+	FragColor = texture(mainTexture, texcoord * textureTiling) * vec4(color, 1.0f);
 }

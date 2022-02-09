@@ -38,6 +38,8 @@ private:
 public:
 	Text(std::string newText, float newScale = 1.0f, glm::vec3 newColor = glm::vec3(0));
 
+	static void BindTextShader();
+
 	void SetString(std::string newText);
 	std::string GetString();
 

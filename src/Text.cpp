@@ -195,27 +195,32 @@ std::string Text::GetString()
     return this->text;
 }
 
-void Text::Render()
+void Text::BindTextShader()
 {
+    textShader->Use();
+    
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
 
-    glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 proj = glm::mat4(1.0f);
 
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
-    model = glm::translate(model, glm::vec3(this->position, -1.0f));
-    model = glm::scale(model, glm::vec3(this->scale));
-
-    textShader->Use();
-    textShader->SetVec3("color", this->color);
     textShader->SetMatrix4("projection", proj);
-    textShader->SetMatrix4("model", model);
     textShader->SetInt("text", 0);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureAtlas);
+}
+
+void Text::Render()
+{
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, glm::vec3(this->position, -1.0f));
+    model = glm::scale(model, glm::vec3(this->scale));
+
+    textShader->SetVec3("color", this->color);
+    textShader->SetMatrix4("model", model);
 
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);

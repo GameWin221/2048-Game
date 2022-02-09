@@ -50,26 +50,33 @@ void Sprite::BindSpriteBuffers()
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
-void Sprite::Render()
+void Sprite::BindSpriteShader()
 {
+    shader->Use();
+
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
-    
-    glm::mat4 model = glm::mat4(1.0f);
+
     glm::mat4 proj = glm::mat4(1.0f);
-    
+
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
+
+    shader->SetMatrix4("projection", proj);
+    shader->SetInt("mainTexture", 0);
+}
+
+void Sprite::Render()
+{
+    glm::mat4 model = glm::mat4(1.0f);
     
     model = glm::translate(model, glm::vec3(this->position.x, this->position.y, -1.0f));
     model = glm::scale(    model, glm::vec3(this->size.x    , this->size.y    , 1.0f));
 
-    shader->Use();
     shader->SetVec3("color", color);
-    shader->SetMatrix4("projection", proj);
     shader->SetMatrix4("model", model);
-    shader->SetInt("mainTexture", 0);
+    shader->SetVec2("textureTiling", this->texture->tiling);
 
-    texture->Use(0);
+    this->texture->Use(0);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

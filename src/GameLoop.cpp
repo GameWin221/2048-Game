@@ -4,18 +4,10 @@ void GameLoop::Init()
 {
 	window = new Window(glm::uvec2(1024, 1024), "Window");
 
-	int size = 16;
+	int size = 4;
 
 	grid = new Grid(size);
-	//grid->SpawnRandomBlock();
-
-	for (int x = 0; x < size; x++)
-	{
-		for (int y = 0; y < size; y++)
-		{
-			grid->AddBlock(glm::ivec2(x, y), 2);
-		}
-	}
+	grid->SpawnRandomBlock();
 
 	scoreDisplay = new Text("Score: ");
 	scoreDisplay->position = glm::vec2(300, 950);
@@ -52,11 +44,15 @@ void GameLoop::Render()
 	window->Clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 
 	Sprite::BindSpriteBuffers(); //Used for instancing
+	Sprite::BindSpriteShader(); // Instancing
 
 	grid->Render();
 
 	for (auto& block : grid->blocks)
 		block.Render();
+
+
+	Text::BindTextShader(); // Instancing
 
 	for (auto& block : grid->blocks)
 		block.RenderText();

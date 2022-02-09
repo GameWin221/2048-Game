@@ -102,22 +102,14 @@ Grid::Grid(unsigned int size)
 	this->gridSize = size;
 	this->gridOffset = 1024.0f / gridSize;
 
-	this->sprite = new Sprite(gridTexture, glm::vec2(0), glm::vec2(gridOffset/2.0f));
+	this->sprite = new Sprite(gridTexture, glm::vec2(0), glm::vec2(1024.0f));
+	this->sprite->texture->tiling = glm::vec2(gridSize*2);
 }
 Grid::~Grid(){}
 
 void Grid::Render()
 {
-	const glm::vec2 halfOffset = glm::vec2(gridOffset / 2.0f);
-
-	for (int x = 0; x < this->gridSize; x++)
-	{
-		for (int y = 0; y < this->gridSize; y++)
-		{
-			this->sprite->position = glm::vec2(gridOffset * x, gridOffset * y) + halfOffset;
-			this->sprite->Render();
-		}
-	}
+	this->sprite->Render();
 }
 
 void Grid::MoveBlocks(Direction dir)
