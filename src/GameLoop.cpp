@@ -2,21 +2,12 @@
 
 void GameLoop::Init()
 {
-	deltaTime = 0.0f;
-
 	window = new Window(glm::uvec2(1024, 1024), "Window");
 
-	int size = 8;
+	int size = 4;
 
 	grid = new Grid(size);
-
-	for (int x = 0; x < size; x++)
-	{
-		for (int y = 0; y < size; y++)
-		{
-			grid->AddBlock(glm::vec2(x, y), 2);
-		}
-	}
+	grid->SpawnRandomBlock();
 
 	scoreDisplay = new Text("Score: ");
 	scoreDisplay->position = glm::vec2(300, 950);
@@ -50,15 +41,19 @@ void GameLoop::Update()
 }
 void GameLoop::Render()
 {
-	window->Clear(glm::vec4(0.3f, 0.3f, 0.4f, 1.0f));
+	window->Clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	Sprite::BindSpriteBuffers(); //Used for instancing
 
 	grid->Render();
 
 	for (auto& block : grid->blocks)
 		block.Render();
 
-	scoreDisplay->Render();
+	for (auto& block : grid->blocks)
+		block.RenderText();
 
+	scoreDisplay->Render();
 	fpsDisplay->RenderFPS();
 
 	window->Display();

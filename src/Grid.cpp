@@ -93,6 +93,7 @@ void SortBlocks(Direction& dir, std::vector<Block>& blocks)
 	}
 }
 
+
 Grid::Grid(unsigned int size)
 {
 	gridTexture = new Texture("Textures/Grid.jpg");
@@ -106,11 +107,13 @@ Grid::~Grid(){}
 
 void Grid::Render()
 {
+	const glm::vec2 halfOffset = glm::vec2(gridOffset / 2.0f);
+
 	for (int x = 0; x < this->gridSize; x++)
 	{
 		for (int y = 0; y < this->gridSize; y++)
 		{
-			this->sprite->position = glm::vec2(gridOffset * x, gridOffset * y) + glm::vec2(gridOffset / 2.0f);
+			this->sprite->position = glm::vec2(gridOffset * x, gridOffset * y) + halfOffset;
 			this->sprite->Render();
 		}
 	}
@@ -123,6 +126,7 @@ void Grid::MoveBlocks(Direction dir)
 	// Sort the blocks in order to move them in a correct order
 	SortBlocks(dir, this->blocks);
 
+	int bID = 0;
 	for (auto& block : this->blocks)
 	{
 		bool isOccupied = false;
@@ -133,40 +137,92 @@ void Grid::MoveBlocks(Direction dir)
 			const glm::ivec2 newPos = block.gridPos + vDir;
 
 			// Check if the block won't go outside of the map
-			if ((newPos.x < 0 || newPos.y < 0) || ((newPos.x >= this->gridSize || newPos.y >= this->gridSize)))
+			if (newPos.x < 0 || newPos.y < 0 || newPos.x >= this->gridSize || newPos.y >= this->gridSize)
 				isOccupied = true;
 
+			int cbID = 0;
 			// Check if the block won't collide with other
 			for (auto& checkedBlock : this->blocks)
 			{
-				// If collided with a block that isn't queued to delete
-				if (checkedBlock.gridPos == newPos && !checkedBlock.deleteQueued)
+				// If not checking itself
+				if (bID != cbID)
 				{
-					isOccupied = true;
-
-					// Check if the block can merge with the checkedBlock
-					if (checkedBlock.value == block.value)
+					// If collided with a block that isn't marked as deleted
+					if (checkedBlock.gridPos == newPos && !checkedBlock.deleteQueued)
 					{
-						checkedBlock.Promote();
-						block.deleteQueued = true;
+						isOccupied = true;
+
+						// Check if the block can merge with the checkedBlock
+						if (checkedBlock.value == block.value)
+						{
+							checkedBlock.Promote();		// Promote the hit block
+							block.deleteQueued = true;	// Mark the block that hit as deleted
+						}
+
+						break;
 					}
-					break;
 				}
+				cbID++;
 			}
 
 			// Move the block if possible
 			if (!isOccupied)
 				block.gridPos = newPos;
 		}
+
+		bID++;
 	}
 
-	// Delete blocks marked as Deleted
-	for (int i = 0; i < this->blocks.size(); i++)
+	// Delete blocks marked as deleted
+	for (int i = 0; i < blocks.size(); i++)
+		if (blocks[i].deleteQueued)
+			blocks.erase(blocks.begin() + i--);
+
+	this->SpawnRandomBlock();
+}
+
+// RNG
+std::random_device device;
+std::mt19937 gen(device());
+
+//std::random_device device2;
+//std::mt19937 gen2(device2());
+
+void Grid::SpawnRandomBlock()
+{
+	std::vector<std::vector<bool>> spotsVec;
+
+	for (int x = 0; x < this->gridSize; x++)
 	{
-		if (this->blocks[i].deleteQueued)
-			this->blocks.erase(this->blocks.begin() + i);
+		std::vector<bool> vec;
+
+		for (int y = 0; y < this->gridSize; y++)
+			vec.push_back(true);
+		
+		spotsVec.push_back(vec);
 	}
+
+	for (auto& b : this->blocks)
+		spotsVec[b.gridPos.x][b.gridPos.y] = false;
 	
+	std::vector<glm::ivec2> freeSpotsVec;
+
+	for (int x = 0; x < spotsVec.size(); x++)
+	{
+		for (int y = 0; y < spotsVec[x].size(); y++)
+		{
+			if (spotsVec[x][y])
+				freeSpotsVec.push_back(glm::ivec2(x, y));
+		}
+	}
+
+	std::uniform_int_distribution<int> posDist(0, freeSpotsVec.size()-1);
+	//std::uniform_int_distribution<int> valDist(1, 3); // <- Control the value outcome here
+
+	//const int value = pow(2, valDist(gen2));
+	const glm::ivec2 position = freeSpotsVec[posDist(gen)];
+
+	this->AddBlock(position, 2);
 }
 
 void Grid::AddBlock(glm::vec2 spawnPos, int spawnValue)

@@ -5,7 +5,7 @@ FPSDisplay::FPSDisplay(glm::vec2 position, float scale)
 	this->fpsText = new Text("FPS", scale);
 	this->fpsText->position = position;
 
-	this->deltaTime = -1.0f;
+	this->deltaTime = -1.0;
 
 	this->lastTick = std::chrono::high_resolution_clock::now();
 }
@@ -20,10 +20,10 @@ void FPSDisplay::UpdateDT()
 
 	auto nowTick = high_resolution_clock::now();
 
-	auto duration = duration_cast<milliseconds>(nowTick - lastTick);
-	this->deltaTime = duration.count() / 1000.0f;
+	auto duration = duration_cast<microseconds>(nowTick - lastTick);
+	this->deltaTime = duration.count() / 1000000.0;
 
-	this->fps = 1.0f / this->deltaTime;
+	this->fps = 1.0 / this->deltaTime;
 
 	this->fpsText->SetString(std::to_string(this->fps));
 

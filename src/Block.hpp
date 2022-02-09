@@ -9,13 +9,14 @@
 class Block
 {
 private:
-	Sprite* sprite;
-
 	float gridBlockOffset;
 
 public:
 	void Render();
+	void RenderText();
 	void Promote();
+
+	Sprite* sprite;
 
 	int value;
 

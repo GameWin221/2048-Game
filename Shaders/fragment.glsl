@@ -1,11 +1,10 @@
-#version 330
+#version 330 core
 
 out vec4 FragColor;
 
 in vec2 texcoord;
 
 uniform vec3 color;
-uniform mat4 transform;
 
 uniform sampler2D mainTexture;
 

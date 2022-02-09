@@ -19,8 +19,6 @@ private:
 
 	FPSDisplay* fpsDisplay;
 
-	float deltaTime;
-
 public:
 	bool IsRunning() { return window->IsOpen(); };
 

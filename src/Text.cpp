@@ -197,35 +197,28 @@ std::string Text::GetString()
 
 void Text::Render()
 {
-    textShader->Use();
+    int windowX, windowY;
+    glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
 
-    // Text color
-    textShader->SetVec3("textColor", this->color);
+    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 proj = glm::mat4(1.0f);
 
-    // Projection matrix
-    glm::mat4 proj = glm::ortho(0.0f, 1024.0f, 0.0f, 1024.0f);
-    textShader->SetMatrix4("projection", proj);
-    
-    // Model matrix (position, scale)
-    glm::mat4 model(1.0f);
-    model = glm::translate(model, glm::vec3(this->position, 0.0f));
+    proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
+
+    model = glm::translate(model, glm::vec3(this->position, -1.0f));
     model = glm::scale(model, glm::vec3(this->scale));
-    textShader->SetMatrix4("model", model);
 
-    // Bind the glyph atlas texture
+    textShader->Use();
+    textShader->SetVec3("color", this->color);
+    textShader->SetMatrix4("projection", proj);
+    textShader->SetMatrix4("model", model);
     textShader->SetInt("text", 0);
+
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textureAtlas);
 
-    // Bind the VAO, VBO
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 
-    // Render
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-    
-    // Unbinding VAO, VBO and glyph atlas texture
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindTexture(GL_TEXTURE_2D, 0);
 }

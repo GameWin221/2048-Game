@@ -15,8 +15,8 @@ private:
 	std::chrono::time_point<std::chrono::high_resolution_clock> lastTick;
 
 public:
-	float deltaTime;
-	float fps;
+	double deltaTime;
+	double fps;
 
 	void UpdateDT();
 	void RenderFPS();

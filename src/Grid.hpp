@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Block.hpp"
-#include <vector>
-
 #include "Direction.hpp"
+#include <vector>
+#include <map>
+#include <random>
 
 class Grid
 {
@@ -21,6 +22,9 @@ public:
 	std::vector<Block> blocks;
 
 	void Render();
+	void SpawnRandomBlock();
+
 	void AddBlock(glm::vec2 spawnPos, int spawnValue);
+
 	void MoveBlocks(Direction dir);
 };

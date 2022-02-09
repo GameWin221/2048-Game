@@ -170,9 +170,9 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\FPSDisplay.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\Direction.hpp" />
+    <ClInclude Include="src\FPSDisplay.hpp" />
     <ClInclude Include="src\GameLoop.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\Input.hpp" />

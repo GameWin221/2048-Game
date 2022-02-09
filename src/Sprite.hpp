@@ -26,6 +26,8 @@ public:
 	glm::vec2 size;
 	glm::vec3 color;
 
+	static void BindSpriteBuffers();
+
 	void Render();
 };
 

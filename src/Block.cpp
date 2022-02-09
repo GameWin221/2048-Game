@@ -22,10 +22,10 @@ const glm::vec3 ValueToColor(int& value)
 		return glm::vec3(1.0f, 0.7f, 0.0f);
 		break;
 	case 64:
-		return glm::vec3(0.0f, 0.0f, 0.1f);
+		return glm::vec3(1.0f, 0.1f, 0.1f);
 		break;
 	case 128:
-		return glm::vec3(0.0f, 0.1f, 0.0f);
+		return glm::vec3(0.1f, 1.0f, 0.0f);
 		break;
 	case 256:
 		return glm::vec3(1.0f, 0.0f, 0.0f);
@@ -74,7 +74,9 @@ void Block::Render()
 	// Set the block's position to fit the grid
 	this->sprite->position = glm::vec2(gridBlockOffset * this->gridPos.x, gridBlockOffset * this->gridPos.y) + glm::vec2(gridBlockOffset / 2.0f);
 	this->sprite->Render();
-
+}
+void Block::RenderText()
+{
 	this->valueText->position = this->sprite->position;
 	this->valueText->Render();
 }

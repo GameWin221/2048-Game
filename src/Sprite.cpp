@@ -44,32 +44,32 @@ Sprite::Sprite(Texture* tex, glm::vec2 pos, glm::vec2 siz, glm::vec3 col)
 }
 Sprite::~Sprite(){}
 
+void Sprite::BindSpriteBuffers()
+{
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+}
+
 void Sprite::Render()
 {
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
-
+    
     glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 proj = glm::mat4(1.0f);
-
+    
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -1.0f));
-
-    model = glm::translate(model, glm::vec3(this->position.x, this->position.y, 0.0f));
+    
+    model = glm::translate(model, glm::vec3(this->position.x, this->position.y, -1.0f));
     model = glm::scale(    model, glm::vec3(this->size.x    , this->size.y    , 1.0f));
 
     shader->Use();
     shader->SetVec3("color", color);
-    shader->SetMatrix4("view", view);
     shader->SetMatrix4("projection", proj);
     shader->SetMatrix4("model", model);
     shader->SetInt("mainTexture", 0);
-    
-    texture->Use(0);
 
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    texture->Use(0);
 
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
