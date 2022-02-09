@@ -58,6 +58,7 @@ void SortBlocks(Direction& dir, std::vector<Block>& blocks)
 		break;
 	}
 	
+	
 	// I know it's unefficient... I may change it later
 	for (auto& b : blocks)
 	{
@@ -185,9 +186,6 @@ void Grid::MoveBlocks(Direction dir)
 std::random_device device;
 std::mt19937 gen(device());
 
-//std::random_device device2;
-//std::mt19937 gen2(device2());
-
 void Grid::SpawnRandomBlock()
 {
 	std::vector<std::vector<bool>> spotsVec;
@@ -217,10 +215,8 @@ void Grid::SpawnRandomBlock()
 	}
 
 	std::uniform_int_distribution<int> posDist(0, freeSpotsVec.size()-1);
-	//std::uniform_int_distribution<int> valDist(1, 3); // <- Control the value outcome here
 
-	//const int value = pow(2, valDist(gen2));
-	const glm::ivec2 position = freeSpotsVec[posDist(gen)];
+	glm::ivec2 position = freeSpotsVec[posDist(gen)];
 
 	this->AddBlock(position, 2);
 }

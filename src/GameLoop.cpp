@@ -4,10 +4,18 @@ void GameLoop::Init()
 {
 	window = new Window(glm::uvec2(1024, 1024), "Window");
 
-	int size = 4;
+	int size = 16;
 
 	grid = new Grid(size);
-	grid->SpawnRandomBlock();
+	//grid->SpawnRandomBlock();
+
+	for (int x = 0; x < size; x++)
+	{
+		for (int y = 0; y < size; y++)
+		{
+			grid->AddBlock(glm::ivec2(x, y), 2);
+		}
+	}
 
 	scoreDisplay = new Text("Score: ");
 	scoreDisplay->position = glm::vec2(300, 950);
