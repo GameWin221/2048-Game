@@ -5,6 +5,7 @@ FPSDisplay::FPSDisplay(glm::vec2 position, float scale)
 	this->fpsText = new Text("FPS", scale);
 	this->fpsText->position = position;
 	this->fpsText->color = glm::vec3(0.9f, 0.0, 0.5f);
+	this->fpsText->scale = 0.5f;
 
 	this->deltaTime = -1.0;
 

@@ -12,7 +12,8 @@ FT_Face face;
 
 Shader* textShader = nullptr;
 
-#define ATLASSIZE 1024
+#define ATLASMAXSIZE 1024
+#define FONTSIZE 128
 
 int atlas_width = 0;
 int atlas_height = 0;
@@ -26,6 +27,9 @@ Text::Text(std::string newText, float newScale, glm::vec3 newColor)
     this->text = newText;
     this->scale = newScale;
     this->color = newColor;
+    this->centered = false;
+
+    this->textBounds = glm::vec2(0);
 
     if (!textShader)
     {
@@ -38,7 +42,7 @@ Text::Text(std::string newText, float newScale, glm::vec3 newColor)
             std::cout << "ERROR::FREETYPE: Failed to load font\n";
         else 
         {
-            FT_Set_Pixel_Sizes(face, 0, 48);
+            FT_Set_Pixel_Sizes(face, 0, FONTSIZE);
             FT_GlyphSlot g = face->glyph;
 
             unsigned int roww = 0;
@@ -54,7 +58,7 @@ Text::Text(std::string newText, float newScale, glm::vec3 newColor)
                     continue;
                 }
 
-                if (roww + g->bitmap.width + 1 >= ATLASSIZE) {
+                if (roww + g->bitmap.width + 1 >= ATLASMAXSIZE) {
                     w = std::max(w, roww);
                     h += rowh;
                     roww = 0;
@@ -91,7 +95,7 @@ Text::Text(std::string newText, float newScale, glm::vec3 newColor)
                 if (FT_Load_Char(face, c, FT_LOAD_RENDER))
                     continue;
 
-                if (ox + g->bitmap.width + 1 >= ATLASSIZE)
+                if (ox + g->bitmap.width + 1 >= ATLASMAXSIZE)
                 {
                     oy += rowh;
                     rowh = 0;
@@ -182,6 +186,9 @@ void Text::SetString(std::string newText)
         vertices.push_back(pt);
     }
 
+    const Character firstChar = characters[this->text[0]];
+    this->textBounds = glm::vec2(x, firstChar.size.y);
+
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(point), vertices.data(), GL_DYNAMIC_DRAW);
@@ -195,7 +202,7 @@ std::string Text::GetString()
     return this->text;
 }
 
-void Text::BindTextShader()
+void Text::InitInstancing()
 {
     textShader->Use();
     
@@ -218,6 +225,12 @@ void Text::Render()
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(this->position, -1.0f));
     model = glm::scale(model, glm::vec3(this->scale));
+
+    if (centered)
+    {
+        const glm::vec2 centerOffset = -this->textBounds / 2.0f;
+        model = glm::translate(model, glm::vec3(centerOffset, 0.0));
+    }
 
     textShader->SetVec3("color", this->color);
     textShader->SetMatrix4("model", model);

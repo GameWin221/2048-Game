@@ -12,7 +12,14 @@ Texture::Texture(std::string name)
 
 	stbi_set_flip_vertically_on_load(true);
 
-	unsigned char* data = stbi_load(name.c_str(), &this->size.x, &this->size.y, &this->nrChannels, 0);
+	unsigned char* data = stbi_load(name.c_str(), &this->size.x, &this->size.y, &this->channels, 0);
+
+	if (this->channels == 4)
+		this->format = GL_RGBA;
+	else if (this->channels == 3)
+		this->format = GL_RGB;
+	else
+		this->channels = 0;
 
 	if (data)
 	{
@@ -24,11 +31,11 @@ Texture::Texture(std::string name)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->size.x, this->size.y, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glTexImage2D(GL_TEXTURE_2D, 0, this->format, this->size.x, this->size.y, 0, this->format, GL_UNSIGNED_BYTE, data);
 		glGenerateMipmap(GL_TEXTURE_2D);
 	}
 	else
-		std::cout << "Failed to load texture" << std::endl;
+		std::cout << "Failed to load texture: \"" << name << "\"\n";
 	
 	stbi_image_free(data);
 }

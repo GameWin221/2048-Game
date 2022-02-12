@@ -63,7 +63,8 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->sprite->color = ValueToColor(this->value);
 
 	this->valueText = new Text(std::to_string(this->value));
-	this->valueText->scale = this->sprite->size.x/75.0f;
+	this->valueText->scale = this->sprite->size.x*0.008f;
+	this->valueText->centered = true;
 }
 Block::~Block()
 {

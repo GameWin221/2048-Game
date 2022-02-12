@@ -16,13 +16,15 @@
 class Texture
 {
 private:
-	int nrChannels;
+	int channels;
 
 	GLuint texture;
 
 public:
 	glm::ivec2 size;
 	glm::vec2 tiling;
+
+	GLenum format;
 
 	void Use(unsigned int textureID);
 

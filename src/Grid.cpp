@@ -95,6 +95,14 @@ void SortBlocks(Direction& dir, std::vector<Block>& blocks)
 }
 
 
+void Grid::MoveBlocksSmooth(float speed)
+{
+	for (this->blocks)
+	{
+
+	}
+}
+
 Grid::Grid(unsigned int size)
 {
 	gridTexture = new Texture("Textures/Grid.jpg");
@@ -198,19 +206,24 @@ void Grid::SpawnRandomBlock()
 	std::vector<glm::ivec2> freeSpotsVec;
 
 	for (int x = 0; x < spotsVec.size(); x++)
-	{
 		for (int y = 0; y < spotsVec[x].size(); y++)
-		{
 			if (spotsVec[x][y])
 				freeSpotsVec.push_back(glm::ivec2(x, y));
-		}
+		
+	
+
+	if (freeSpotsVec.size() > 0)
+	{
+		std::uniform_int_distribution<int> posDist(0, freeSpotsVec.size() - 1);
+
+		glm::ivec2 position = freeSpotsVec[posDist(gen)];
+
+		this->AddBlock(position, 2);
 	}
-
-	std::uniform_int_distribution<int> posDist(0, freeSpotsVec.size()-1);
-
-	glm::ivec2 position = freeSpotsVec[posDist(gen)];
-
-	this->AddBlock(position, 2);
+	else
+	{
+		// lose
+	}
 }
 
 void Grid::AddBlock(glm::vec2 spawnPos, int spawnValue)

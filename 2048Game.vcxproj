@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="include\STB\stb_image.cpp" />
     <ClCompile Include="src\Block.cpp" />
     <ClCompile Include="src\FPSDisplay.cpp" />
@@ -170,6 +171,7 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Font.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\Direction.hpp" />
     <ClInclude Include="src\FPSDisplay.hpp" />

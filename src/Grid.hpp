@@ -15,6 +15,8 @@ private:
 
 	float gridOffset;
 
+	void MoveBlocksSmooth(float speed);
+
 public:
 	Grid(unsigned int size);
 	~Grid();

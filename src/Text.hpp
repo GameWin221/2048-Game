@@ -35,13 +35,18 @@ private:
 
 	std::string text;
 
+	// Size of the text's bounds in pixels
+	glm::vec2 textBounds;
+
 public:
 	Text(std::string newText, float newScale = 1.0f, glm::vec3 newColor = glm::vec3(0));
 
-	static void BindTextShader();
+	static void InitInstancing();
 
 	void SetString(std::string newText);
 	std::string GetString();
+
+	bool centered;
 
 	glm::vec3 color;
 	glm::vec2 position;

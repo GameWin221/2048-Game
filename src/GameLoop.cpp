@@ -8,10 +8,10 @@ void GameLoop::Init()
 
 	grid = new Grid(size);
 	grid->SpawnRandomBlock();
-
+	
 	scoreDisplay = new Text("Score: ");
 	scoreDisplay->position = glm::vec2(300, 950);
-
+	
 	fpsDisplay = new FPSDisplay(glm::vec2(800, 950), 1.0f);
 }
 void GameLoop::Update()
@@ -43,8 +43,7 @@ void GameLoop::Render()
 {
 	window->Clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
 
-	Sprite::BindSpriteBuffers(); //Used for instancing
-	Sprite::BindSpriteShader(); // Instancing
+	Sprite::InitInstancing();
 
 	grid->Render();
 
@@ -52,7 +51,7 @@ void GameLoop::Render()
 		block.Render();
 
 
-	Text::BindTextShader(); // Instancing
+	Text::InitInstancing();
 
 	for (auto& block : grid->blocks)
 		block.RenderText();

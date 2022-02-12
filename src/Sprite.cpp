@@ -44,16 +44,8 @@ Sprite::Sprite(Texture* tex, glm::vec2 pos, glm::vec2 siz, glm::vec3 col)
 }
 Sprite::~Sprite(){}
 
-void Sprite::BindSpriteBuffers()
+void Sprite::InitInstancing()
 {
-    glBindVertexArray(VAO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-}
-
-void Sprite::BindSpriteShader()
-{
-    shader->Use();
-
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
 
@@ -61,8 +53,12 @@ void Sprite::BindSpriteShader()
 
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
+    shader->Use();
     shader->SetMatrix4("projection", proj);
     shader->SetInt("mainTexture", 0);
+
+    glBindVertexArray(VAO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
 void Sprite::Render()
