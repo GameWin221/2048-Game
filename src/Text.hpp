@@ -40,6 +40,7 @@ private:
 
 public:
 	Text(std::string newText, float newScale = 1.0f, glm::vec3 newColor = glm::vec3(0));
+	~Text();
 
 	static void InitInstancing();
 

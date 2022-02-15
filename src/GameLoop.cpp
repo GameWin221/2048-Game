@@ -7,8 +7,7 @@ void GameLoop::Init()
 	int size = 4;
 
 	grid = new Grid(size);
-	grid->SpawnRandomBlock();
-	
+
 	scoreDisplay = new Text("Score: ");
 	scoreDisplay->position = glm::vec2(50, 950);
 	

@@ -55,7 +55,6 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->value = val;
 
 	this->deleteQueued = false;
-	this->promoteQueued = false;
 
 	this->sprite = new Sprite(blockTexture, glm::vec2(0), 0.95f * glm::vec2(gridOffset/2.0));
 	this->sprite->color = ColorLUT(this->value);
@@ -64,6 +63,13 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->valueText = new Text(std::to_string(this->value));
 	this->valueText->scale = this->sprite->size.x*0.008f;
 	this->valueText->centered = true;
+
+	this->target.targetPos         = this->sprite->position;
+	this->target.targetDir         = glm::vec2(0);
+	this->target.distanceTarget    = 0.0f;
+	this->target.distanceTravelled = 0.0f;
+
+	this->mergeToID = -1;
 }
 Block::~Block(){}
 
@@ -79,6 +85,7 @@ void Block::RenderText()
 void Block::Promote()
 {
 	this->value *= 2;
+
 	this->sprite->color = ColorLUT(this->value);
 	this->valueText->SetString(std::to_string(this->value));
 

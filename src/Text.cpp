@@ -149,6 +149,7 @@ Text::Text(std::string newText, float newScale, glm::vec3 newColor)
 
     this->SetString(this->text);
 }
+Text::~Text(){};
 
 void Text::SetString(std::string newText)
 {

@@ -32,7 +32,6 @@ void Switch(std::vector<Block>& blocks, int &index)
 	blocks[index] = blocks[index+1];
 	blocks[index+1] = c;
 }
-
 void SortBlocks(Direction& dir, std::vector<Block>& blocks)
 {
 	bool checkX;
@@ -105,60 +104,75 @@ Grid::Grid(unsigned int size)
 	this->sprite = new Sprite(gridTexture, glm::vec2(0), glm::vec2(1024.0f));
 	this->sprite->texture->tiling = glm::vec2(gridSize*2);
 
+	this->canSpawnBlock = false;
+	this->blocksMoving = false;
+
 	this->SpawnRandomBlock();
 }
 Grid::~Grid(){}
 
 void Grid::Update(double& deltaTime)
 {
-	float dtFloat = static_cast<float>(deltaTime);
+	// Used for fps-independant movement speed
+	float dtFloat = static_cast<float>(deltaTime);	
 
-	if (targetPosCache.size() > 0)
+	// Required to check if all of the blocks are at their target's position
+	int blocksOnTarget = 0;				 
+	const int blocksSize = blocks.size();
+
+	// Update all of the blocks
+	for (int i = 0; i < blocks.size(); i++)
 	{
-		int blocksOnTarget = 0;
-		const int blocksSize = blocks.size();
+		Block& block = blocks[i];
 
-		for (int i = 0; i < blocks.size(); i++)
-		//for (int i = blocks.size()-1; i > 0; i--)
+		// If the block isn't at its target yet
+		if (block.target.distanceTravelled < block.target.distanceTarget)
 		{
-			if (distanceTravelledCache[i] < distanceTargetCache[i])
-			{
-				distanceTravelledCache[i] += blockMoveSpeed * dtFloat;
-				blocks[i].sprite->position += -targetDirCache[i] * blockMoveSpeed * dtFloat;
-			}
-			else
-			{
-				blocks[i].sprite->position = targetPosCache[i];
-
-				if (blocks[i].deleteQueued)
-				{
-					blocks.erase(blocks.begin() + i);
-					targetPosCache.erase(targetPosCache.begin() + i);
-					targetDirCache.erase(targetDirCache.begin() + i);
-					distanceTargetCache.erase(distanceTargetCache.begin() + i);
-					distanceTravelledCache.erase(distanceTravelledCache.begin() + i);
-					i--;
-					//i++;
-
-					std::cout << "delete";
-				}
-				//tu nie dziala
-				// The blocks cannot merge until promoted
-				else if (blocks[i].promoteQueued)
-				{
-					std::cout << "promote";
-					//blocks[i].promoteQueued = false;
-					blocks[i].Promote();
-				}
-
-				blocksOnTarget++;
-			}
+			// Move the block towards its target
+			block.target.distanceTravelled += blockMoveSpeed * dtFloat;
+			block.sprite->position += -block.target.targetDir * blockMoveSpeed * dtFloat;
 		}
-
-		if (blocksOnTarget == blocksSize)
-			this->blocksMoving = false;
+		// If the block is at its target
 		else
-			this->blocksMoving = true;
+		{
+			// Align the block to the grid
+			block.sprite->position = block.target.targetPos;
+
+			// If the block needs to be deleted (merged with another)
+			if (block.deleteQueued)
+			{
+				// Promote the another block
+				blocks[block.mergeToID].Promote();
+
+				// Lower 'mergeToID' in each block by 1
+				for (auto& b : this->blocks)
+				{
+					if (b.mergeToID >= i)
+						b.mergeToID--;
+				}
+
+				// Delete the block and lower 'i' by 1
+				blocks.erase(blocks.begin() + i--);
+
+				// 'i' and 'mergeToID' are being lowered by 1 because as a block gets erased from 
+				// the 'blocks' vector, every other block behind the erased one gets moved 1 index to the left
+			}
+
+			blocksOnTarget++;
+		}
+	}
+
+	// If all blocks are on their targets
+	if (blocksOnTarget == blocksSize)
+		this->blocksMoving = false;
+	else
+		this->blocksMoving = true;
+
+	// When stopped moving blocks (1 frame)
+	if (!this->blocksMoving && this->canSpawnBlock)
+	{
+		this->SpawnRandomBlock();
+		this->canSpawnBlock = false;
 	}
 }
 void Grid::Render()
@@ -170,15 +184,12 @@ void Grid::MoveBlocks(Direction dir)
 {
 	if (!this->blocksMoving)
 	{
+		this->canSpawnBlock = true;
+
 		const glm::ivec2 vDir = DirToVec(dir);
 
 		// Sort the blocks in order to move them in a correct order
 		SortBlocks(dir, this->blocks);
-
-		targetPosCache.clear();
-		targetDirCache.clear();
-		distanceTargetCache.clear();
-		distanceTravelledCache.clear();
 
 		int bID = 0;
 		for (auto& block : this->blocks)
@@ -209,9 +220,10 @@ void Grid::MoveBlocks(Direction dir)
 							// If the 'block' can merge with 'checkedBlock'
 							if (checkedBlock.value == block.value && !checkedBlock.promoteQueued)
 							{
-								block.deleteQueued = true;
-								block.targetGridPos = checkedBlock.targetGridPos; // Move the block inside the other one to create an effect of merging
 								checkedBlock.promoteQueued = true;
+								block.deleteQueued = true;
+								block.mergeToID = cbID;
+								block.targetGridPos = checkedBlock.targetGridPos;
 							}
 
 							break;
@@ -228,22 +240,19 @@ void Grid::MoveBlocks(Direction dir)
 			bID++;
 		}
 
-		this->SpawnRandomBlock();
-
 		// Cache the blocks targets and distances to travel
 		for (auto& block : this->blocks)
 		{
 			glm::vec2 targetPos = glm::vec2(gridOffset * block.targetGridPos.x, gridOffset * block.targetGridPos.y) + glm::vec2(gridOffset / 2.0f);
 			glm::vec2 targetDir = glm::normalize(block.sprite->position - targetPos);
 
-			targetPosCache.push_back(targetPos);
-			targetDirCache.push_back(targetDir);
-
 			float distanceTarget = glm::length(block.sprite->position - targetPos);
 			float distanceTravelled = 0.0f;
 
-			distanceTargetCache.push_back(distanceTarget);
-			distanceTravelledCache.push_back(distanceTravelled);
+			block.target.targetPos = targetPos;
+			block.target.targetDir = targetDir;
+			block.target.distanceTarget = distanceTarget;
+			block.target.distanceTravelled = distanceTravelled;
 		}
 	}
 }
@@ -291,7 +300,6 @@ void Grid::SpawnRandomBlock()
 		// lose
 	}
 }
-
 void Grid::AddBlock(glm::vec2 spawnPos, int spawnValue)
 {
 	Block block(spawnPos, this->gridOffset, spawnValue);
