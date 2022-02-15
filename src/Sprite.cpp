@@ -54,7 +54,7 @@ void Sprite::InitInstancing()
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
     shader->Use();
-    shader->SetMatrix4("projection", proj);
+    shader->SetMat4("projection", proj);
     shader->SetInt("mainTexture", 0);
 
     glBindVertexArray(VAO);
@@ -69,7 +69,7 @@ void Sprite::Render()
     model = glm::scale(    model, glm::vec3(this->size.x    , this->size.y    , 1.0f));
 
     shader->SetVec3("color", color);
-    shader->SetMatrix4("model", model);
+    shader->SetMat4("model", model);
     shader->SetVec2("textureTiling", this->texture->tiling);
 
     this->texture->Use(0);

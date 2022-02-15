@@ -82,13 +82,11 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     // Cleaning up after the compilation
     glDeleteShader(vertex);
     glDeleteShader(fragment);
-    this->loaded = true;
 }
 
 Shader::~Shader()
 {
     glDeleteProgram(ID);
-    this->loaded = false;
 }
 
 void Shader::Use()
@@ -96,7 +94,7 @@ void Shader::Use()
     glUseProgram(ID);
 }
 
-void Shader::SetMatrix4(const std::string& name, glm::mat4 value) const
+void Shader::SetMat4(const std::string& name, glm::mat4 value) const
 {
     glUniformMatrix4fv(glGetUniformLocation(ID, name.c_str()), 1, GL_FALSE, glm::value_ptr(value));
 }
@@ -137,9 +135,4 @@ void Shader::SetVec2(const std::string& name, glm::vec2 value) const
 int Shader::GetUniformPos(const std::string& name)
 {
     return glGetUniformLocation(ID, name.c_str());
-}
-
-bool Shader::IsLoaded()
-{
-    return this->loaded;
 }

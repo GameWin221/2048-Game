@@ -15,6 +15,7 @@ namespace Input
 	void UpdateOldInputs()
 	{
 		GLFWwindow* window = glfwGetCurrentContext();
+
 		if (UpDirKeyPress)
 			upWasPressed = true;
 		else

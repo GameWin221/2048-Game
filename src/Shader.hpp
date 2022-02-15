@@ -16,15 +16,16 @@
 
 class Shader
 {
-public:
-    unsigned int ID;
+private:
+    GLuint ID;
 
+public:
     Shader(const char* vertexPath, const char* fragmentPath);
     ~Shader();
 
     void Use();
 
-    void SetMatrix4(const std::string& name, glm::mat4 value) const;
+    void SetMat4   (const std::string& name, glm::mat4 value) const;
     void SetBool   (const std::string& name, bool      value) const;
     void SetInt    (const std::string& name, int       value) const;
     void SetFloat  (const std::string& name, float     value) const;
@@ -34,9 +35,7 @@ public:
     void SetVec2   (const std::string& name, glm::vec2 value) const;
 
     int GetUniformPos(const std::string& name);
-    bool IsLoaded();
 
-private:
-    bool loaded = false;
+    const GLuint& GetShaderID() const { return this->ID; };
 };
 #endif

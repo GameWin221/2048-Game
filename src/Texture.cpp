@@ -19,7 +19,7 @@ Texture::Texture(std::string name)
 	else if (this->channels == 3)
 		this->format = GL_RGB;
 	else
-		this->channels = 0;
+		this->format = 0;
 
 	if (data)
 	{

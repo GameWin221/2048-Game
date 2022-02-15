@@ -11,11 +11,16 @@ class Grid
 private:
 	Sprite* sprite;
 
-	unsigned int gridSize;
+	std::vector<glm::vec2> targetPosCache;
+	std::vector<glm::vec2> targetDirCache;
+	std::vector<float> distanceTargetCache;
+	std::vector<float> distanceTravelledCache;
 
+	unsigned int gridSize;
 	float gridOffset;
 
-	void MoveBlocksSmooth(float speed);
+	bool blocksMoving;
+	const float blockMoveSpeed = 1700.0f;
 
 public:
 	Grid(unsigned int size);
@@ -23,6 +28,7 @@ public:
 
 	std::vector<Block> blocks;
 
+	void Update(double& deltaTime);
 	void Render();
 	void SpawnRandomBlock();
 

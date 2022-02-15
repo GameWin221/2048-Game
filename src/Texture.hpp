@@ -16,20 +16,24 @@
 class Texture
 {
 private:
-	int channels;
+	glm::ivec2 size;
 
+	GLint channels;
 	GLuint texture;
+	GLenum format;
 
 public:
-	glm::ivec2 size;
-	glm::vec2 tiling;
-
-	GLenum format;
+	Texture(std::string name);
+	~Texture();
 
 	void Use(unsigned int textureID);
 
-	Texture(std::string name);
-	~Texture();
+	const glm::ivec2& GetSize()      const { return this->size;     };
+	const GLenum&	  GetFormat()    const { return this->format;   };
+	const GLint&	  GetChannels()  const { return this->channels; };
+	const GLuint&	  GetTextureID() const { return this->texture;  };
+
+	glm::vec2 tiling;
 };
 
 #endif

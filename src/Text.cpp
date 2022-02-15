@@ -213,7 +213,7 @@ void Text::InitInstancing()
 
     proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
-    textShader->SetMatrix4("projection", proj);
+    textShader->SetMat4("projection", proj);
     textShader->SetInt("text", 0);
 
     glActiveTexture(GL_TEXTURE0);
@@ -233,7 +233,7 @@ void Text::Render()
     }
 
     textShader->SetVec3("color", this->color);
-    textShader->SetMatrix4("model", model);
+    textShader->SetMat4("model", model);
 
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);

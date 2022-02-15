@@ -1,5 +1,3 @@
-#include <glm.hpp>
-
 #ifndef DIRECTION_HPP
 #define DIRECTION_HPP
 

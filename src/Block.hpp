@@ -9,22 +9,21 @@
 class Block
 {
 private:
-	float gridBlockOffset;
+	Text* valueText;
 
 public:
 	void Render();
 	void RenderText();
 	void Promote();
 
-	Sprite* sprite;
-
 	int value;
 
+	bool promoteQueued;
 	bool deleteQueued;
 
-	glm::ivec2 gridPos;
+	Sprite* sprite;
 
-	Text* valueText;
+	glm::ivec2 targetGridPos;
 
 	Block(glm::ivec2 pos, const float& gridOffset, int val);
 	~Block();

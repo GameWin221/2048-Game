@@ -10,9 +10,9 @@ void GameLoop::Init()
 	grid->SpawnRandomBlock();
 	
 	scoreDisplay = new Text("Score: ");
-	scoreDisplay->position = glm::vec2(300, 950);
+	scoreDisplay->position = glm::vec2(50, 950);
 	
-	fpsDisplay = new FPSDisplay(glm::vec2(800, 950), 1.0f);
+	fpsDisplay = new FPSDisplay(glm::vec2(700, 950), 1.0f);
 }
 void GameLoop::Update()
 {
@@ -36,6 +36,8 @@ void GameLoop::Update()
 	else if (Input::Clicked(Right))
 		grid->MoveBlocks(Right);
 
+	grid->Update(fpsDisplay->deltaTime);
+
 	// Check key states to use in the next frame
 	Input::UpdateOldInputs();
 }
@@ -49,7 +51,6 @@ void GameLoop::Render()
 
 	for (auto& block : grid->blocks)
 		block.Render();
-
 
 	Text::InitInstancing();
 
