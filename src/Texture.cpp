@@ -8,9 +8,9 @@ void Texture::Use(unsigned int textureID)
 
 Texture::Texture(std::string name)
 {
-	this->tiling = glm::vec2(1.0f);
-
 	stbi_set_flip_vertically_on_load(true);
+
+	this->tiling = glm::vec2(1.0f);
 
 	unsigned char* data = stbi_load(name.c_str(), &this->size.x, &this->size.y, &this->channels, 0);
 

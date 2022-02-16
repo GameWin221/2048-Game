@@ -3,9 +3,6 @@
 #ifndef TEXT_HPP
 #define TEXT_HPP
 
-#include <ft2build.h>
-#include FT_FREETYPE_H 
-
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 
@@ -13,11 +10,10 @@
 #include <glfw3.h>
 
 #include <iostream>
-#include <map>
 #include <vector>
-#include <algorithm>
 
 #include "Shader.hpp"
+#include "Font.hpp"
 
 struct point {
 	GLfloat x;
@@ -35,17 +31,22 @@ private:
 
 	std::string text;
 
+	Font* font;
+
 	// Size of the text's bounds in pixels
 	glm::vec2 textBounds;
 
 public:
-	Text(std::string newText, float newScale = 1.0f, glm::vec3 newColor = glm::vec3(0));
+	Text(Font* newFont, std::string newText, float newScale = 1.0f, glm::vec3 newColor = glm::vec3(0));
 	~Text();
 
 	static void InitInstancing();
 
 	void SetString(std::string newText);
 	std::string GetString();
+
+	void SetFont(Font* newFont);
+	Font* GetFont();
 
 	bool centered;
 

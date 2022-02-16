@@ -1,18 +1,19 @@
-/*
 #include "Font.hpp"
 
-Font::Font()
+Font* defaultFont = nullptr;
+
+Font::Font(std::string fontPath, int fontSize)
 {
     if (FT_Init_FreeType(&ft))
         std::cout << "ERROR::FREETYPE: Could not init FreeType Library\n";
     
-    if (FT_New_Face(ft, "Fonts/calibri.ttf", 0, &face))
+    if (FT_New_Face(ft, fontPath.c_str(), 0, &face))
         std::cout << "ERROR::FREETYPE: Failed to load font\n";
     else
     {
-        FT_Set_Pixel_Sizes(face, 0, FONTSIZE);
+        FT_Set_Pixel_Sizes(face, 0, fontSize);
         FT_GlyphSlot g = face->glyph;
-    
+
         unsigned int roww = 0;
         unsigned int rowh = 0;
         unsigned int w = 0;
@@ -91,16 +92,20 @@ Font::Font()
             ox += g->bitmap.width + 1;
         }
     
-        atlas_width = w;
-        atlas_height = h;
+        this->atlasSize.x = w;
+        this->atlasSize.y = h;
     }
     
     
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 }
+Font::~Font(){}
 
-Font::~Font()
+Font* Font::DefaultFont()
 {
+    if (!defaultFont)
+        defaultFont = new Font("Fonts/Roboto-Medium.ttf", 128);
+
+    return defaultFont;
 }
-*/

@@ -60,7 +60,7 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->sprite->color = ColorLUT(this->value);
 	this->sprite->position = glm::vec2(gridOffset * this->targetGridPos.x, gridOffset * this->targetGridPos.y) + glm::vec2(gridOffset / 2.0f);
 
-	this->valueText = new Text(std::to_string(this->value));
+	this->valueText = new Text(Font::DefaultFont(), std::to_string(this->value));
 	this->valueText->scale = this->sprite->size.x*0.008f;
 	this->valueText->centered = true;
 

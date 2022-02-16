@@ -1,4 +1,3 @@
-/*
 #pragma once
 
 #ifndef FONT_HPP
@@ -18,6 +17,8 @@
 #include <vector>
 #include <algorithm>
 
+#define ATLASMAXSIZE 1024
+
 struct Character {
     glm::fvec2 size;
     glm::fvec2 pivot;
@@ -31,20 +32,16 @@ private:
     FT_Library ft;
     FT_Face face;
 
-    #define ATLASMAXSIZE 1024
-    #define FONTSIZE 128
-
-    int atlas_width = 0;
-    int atlas_height = 0;
-
-    GLuint textureAtlas;
-
+public:
     std::map<char, Character> characters;
 
-public:
-	Font();
+    glm::ivec2 atlasSize;
+    GLuint textureAtlas;
+
+    static Font* DefaultFont();
+
+	Font(std::string fontPath, int fontSize);
 	~Font();
 };
 
 #endif
-*/

@@ -8,9 +8,11 @@ void GameLoop::Init()
 
 	grid = new Grid(size);
 
-	scoreDisplay = new Text("Score: ");
+	scoreDisplay = new Text(Font::DefaultFont(), "Score: ");
 	scoreDisplay->position = glm::vec2(50, 950);
 	
+	horror = new Font("Fonts/horror.ttf", 128);
+
 	fpsDisplay = new FPSDisplay(glm::vec2(700, 950), 1.0f);
 }
 void GameLoop::Update()
@@ -20,11 +22,11 @@ void GameLoop::Update()
 	fpsDisplay->UpdateDT();
 
 	// If pressed W/Up Arrow
-	if (Input::Clicked(Up))	
+	if (Input::Clicked(Up))
 		grid->MoveBlocks(Up);
 
 	// If pressed S/Down Arrow
-	else if (Input::Clicked(Down)) 
+	else if (Input::Clicked(Down))
 		grid->MoveBlocks(Down);
 
 	// If pressed A/Left Arrow

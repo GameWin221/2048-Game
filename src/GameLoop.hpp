@@ -8,6 +8,7 @@
 #include "Input.hpp"
 #include "Text.hpp"
 #include "FPSDisplay.hpp"
+#include "Font.hpp"
 
 class GameLoop
 {
@@ -16,6 +17,8 @@ private:
 	Grid* grid;
 
 	Text* scoreDisplay;
+
+	Font* horror;
 
 	FPSDisplay* fpsDisplay;
 
