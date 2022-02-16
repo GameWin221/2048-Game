@@ -27,7 +27,7 @@ Font::Font(std::string fontPath, int fontSize)
                 continue;
             }
     
-            if (roww + g->bitmap.width + 1 >= ATLASMAXSIZE) {
+            if (roww + g->bitmap.width + SPACING >= ATLASMAXSIZE) {
                 w = std::max(w, roww);
                 h += rowh;
                 roww = 0;
@@ -38,7 +38,7 @@ Font::Font(std::string fontPath, int fontSize)
         }
     
         w = std::max(w, roww);
-        h += rowh;
+        h += rowh + SPACING;
     
         glActiveTexture(GL_TEXTURE0);
         glGenTextures(1, &textureAtlas);
@@ -64,9 +64,9 @@ Font::Font(std::string fontPath, int fontSize)
             if (FT_Load_Char(face, c, FT_LOAD_RENDER))
                 continue;
     
-            if (ox + g->bitmap.width + 1 >= ATLASMAXSIZE)
+            if (ox + g->bitmap.width + SPACING >= ATLASMAXSIZE)
             {
-                oy += rowh;
+                oy += rowh + SPACING;
                 rowh = 0;
                 ox = 0;
             }

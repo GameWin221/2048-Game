@@ -53,17 +53,19 @@ void Text::SetString(std::string newText)
 
         if (!w || !h) continue;
 
+        const glm::ivec2 atlasSize = this->font->GetAtlasSize();
+
         point pt = { x2, -y2, character.offset.x, character.offset.y };
         vertices.push_back(pt);
-        pt = { x2 + w, -y2    , character.offset.x + character.size.x / this->font->atlasSize.x, character.offset.y };
+        pt = { x2 + w, -y2    , character.offset.x + character.size.x / atlasSize.x, character.offset.y };
         vertices.push_back(pt);
-        pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / this->font->atlasSize.y };
+        pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / atlasSize.y };
         vertices.push_back(pt);
-        pt = { x2 + w, -y2 - h, character.offset.x + character.size.x / this->font->atlasSize.x, character.offset.y + character.size.y / this->font->atlasSize.y };
+        pt = { x2 + w, -y2 - h, character.offset.x + character.size.x / atlasSize.x, character.offset.y + character.size.y / atlasSize.y };
         vertices.push_back(pt);
-        pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / this->font->atlasSize.y };
+        pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / atlasSize.y };
         vertices.push_back(pt);
-        pt = { x2 + w, -y2    , character.offset.x + character.size.x / this->font->atlasSize.x, character.offset.y };
+        pt = { x2 + w, -y2    , character.offset.x + character.size.x / atlasSize.x, character.offset.y };
         vertices.push_back(pt);
     }
 
@@ -127,6 +129,6 @@ void Text::Render()
     glBindVertexArray(this->VAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->VBO);
 
-    glBindTexture(GL_TEXTURE_2D, this->font->textureAtlas);
+    glBindTexture(GL_TEXTURE_2D, this->font->GetTextureID());
     glDrawArrays(GL_TRIANGLES, 0, vertices.size());
 }

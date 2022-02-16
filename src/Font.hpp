@@ -18,6 +18,7 @@
 #include <algorithm>
 
 #define ATLASMAXSIZE 1024
+#define SPACING 2
 
 struct Character {
     glm::fvec2 size;
@@ -32,13 +33,16 @@ private:
     FT_Library ft;
     FT_Face face;
 
-public:
-    std::map<char, Character> characters;
-
     glm::ivec2 atlasSize;
     GLuint textureAtlas;
 
+public:
+    std::map<char, Character> characters;
+
     static Font* DefaultFont();
+
+    const glm::ivec2& GetAtlasSize() const { return this->atlasSize;    };
+    const GLuint& GetTextureID()     const { return this->textureAtlas; };
 
 	Font(std::string fontPath, int fontSize);
 	~Font();

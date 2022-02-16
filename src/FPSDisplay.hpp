@@ -19,9 +19,9 @@ public:
 	double fps;
 
 	void UpdateDT();
-	void RenderFPS();
+	void Render();
 
-	FPSDisplay(glm::vec2 position, float scale);
+	FPSDisplay();
 	~FPSDisplay();
 };
 

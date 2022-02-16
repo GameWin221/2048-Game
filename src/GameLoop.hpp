@@ -9,6 +9,7 @@
 #include "Text.hpp"
 #include "FPSDisplay.hpp"
 #include "Font.hpp"
+#include "ScoreDisplay.hpp"
 
 class GameLoop
 {
@@ -16,10 +17,9 @@ private:
 	Window* window;
 	Grid* grid;
 
-	Text* scoreDisplay;
-
 	Font* horror;
 
+	ScoreDisplay* scoreDisplay;
 	FPSDisplay* fpsDisplay;
 
 public:

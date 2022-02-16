@@ -2,6 +2,8 @@
 
 #include "Block.hpp"
 #include "Direction.hpp"
+#include "ScoreDisplay.hpp"
+
 #include <vector>
 #include <map>
 #include <random>
@@ -16,7 +18,7 @@ private:
 
 	bool canSpawnBlock;
 	bool blocksMoving;
-	const float blockMoveSpeed = 1700.0f;
+	const float blockMoveSpeed = 2500.0f;
 
 public:
 	Grid(unsigned int size);
@@ -24,7 +26,7 @@ public:
 
 	std::vector<Block> blocks;
 
-	void Update(double& deltaTime);
+	void Update(double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();
 	void SpawnRandomBlock();
 

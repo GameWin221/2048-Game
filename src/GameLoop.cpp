@@ -2,18 +2,16 @@
 
 void GameLoop::Init()
 {
-	window = new Window(glm::uvec2(1024, 1024), "Window");
+	window = new Window(glm::uvec2(1024, 1224), "2048");
 
 	int size = 4;
 
 	grid = new Grid(size);
 
-	scoreDisplay = new Text(Font::DefaultFont(), "Score: ");
-	scoreDisplay->position = glm::vec2(50, 950);
-	
 	horror = new Font("Fonts/horror.ttf", 128);
 
-	fpsDisplay = new FPSDisplay(glm::vec2(700, 950), 1.0f);
+	scoreDisplay = new ScoreDisplay();
+	fpsDisplay = new FPSDisplay();
 }
 void GameLoop::Update()
 {
@@ -37,14 +35,14 @@ void GameLoop::Update()
 	else if (Input::Clicked(Right))
 		grid->MoveBlocks(Right);
 
-	grid->Update(fpsDisplay->deltaTime);
+	grid->Update(fpsDisplay->deltaTime, scoreDisplay);
 
 	// Check key states to use in the next frame
 	Input::UpdateOldInputs();
 }
 void GameLoop::Render()
 {
-	window->Clear(glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+	window->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 	Sprite::InitInstancing();
 
@@ -59,7 +57,7 @@ void GameLoop::Render()
 		block.RenderText();
 
 	scoreDisplay->Render();
-	fpsDisplay->RenderFPS();
+	fpsDisplay->Render();
 
 	window->Display();
 }

@@ -1,8 +1,14 @@
 #include "FPSDisplay.hpp"
 
-FPSDisplay::FPSDisplay(glm::vec2 position, float scale)
+FPSDisplay::FPSDisplay()
 {
-	this->fpsText = new Text(Font::DefaultFont(), "FPS: ", scale);
+	int wX, wY;
+	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wY);
+	glm::vec2 position(wX, wY);
+	position.x *= 0.75f;
+	position.y *= 0.95f;
+
+	this->fpsText = new Text(Font::DefaultFont(), "FPS: ");
 	this->fpsText->position = position;
 	this->fpsText->color = glm::vec3(0.9f, 0.0, 0.5f);
 	this->fpsText->scale = 0.5f;
@@ -28,12 +34,13 @@ void FPSDisplay::UpdateDT()
 
 	this->fps = 1.0 / this->deltaTime;
 
-	this->fpsText->SetString("FPS: " + std::to_string(this->fps));
+	int fpsRounded = (int)std::trunc(this->fps + 0.5);
+	this->fpsText->SetString("FPS: " + std::to_string(fpsRounded));
 
 	this->lastTick = high_resolution_clock::now();
 }
 
-void FPSDisplay::RenderFPS()
+void FPSDisplay::Render()
 {
 	this->fpsText->Render();
 }

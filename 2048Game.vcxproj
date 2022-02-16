@@ -150,6 +150,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ScoreDisplay.cpp" />
     <ClCompile Include="src\Font.cpp" />
     <ClCompile Include="include\STB\stb_image.cpp" />
     <ClCompile Include="src\Block.cpp" />
@@ -171,6 +172,7 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ScoreDisplay.hpp" />
     <ClInclude Include="src\Font.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\Direction.hpp" />

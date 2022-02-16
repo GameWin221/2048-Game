@@ -96,13 +96,14 @@ void SortBlocks(Direction& dir, std::vector<Block>& blocks)
 
 Grid::Grid(unsigned int size)
 {
-	gridTexture = new Texture("Textures/Grid.jpg");
+	gridTexture = new Texture("Textures/Grid.png");
 
 	this->gridSize = size;
 	this->gridOffset = 1024.0f / gridSize;
 
 	this->sprite = new Sprite(gridTexture, glm::vec2(0), glm::vec2(1024.0f));
 	this->sprite->texture->tiling = glm::vec2(gridSize*2);
+	this->sprite->color = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	this->canSpawnBlock = false;
 	this->blocksMoving = false;
@@ -111,7 +112,7 @@ Grid::Grid(unsigned int size)
 }
 Grid::~Grid(){}
 
-void Grid::Update(double& deltaTime)
+void Grid::Update(double& deltaTime, ScoreDisplay* scoreDisplay)
 {
 	// Used for fps-independant movement speed
 	float dtFloat = static_cast<float>(deltaTime);	
@@ -143,6 +144,8 @@ void Grid::Update(double& deltaTime)
 			{
 				// Promote the another block
 				blocks[block.mergeToID].Promote();
+
+				scoreDisplay->AddScore(blocks[block.mergeToID].value);
 
 				// Lower 'mergeToID' in each block by 1
 				for (auto& b : this->blocks)

@@ -7,6 +7,7 @@ Window::Window(glm::uvec2 size, std::string name)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	glfwWindow = glfwCreateWindow(size.x, size.y, name.c_str(), NULL, NULL);
 	if (glfwWindow == NULL)
