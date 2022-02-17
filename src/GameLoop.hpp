@@ -25,8 +25,8 @@ private:
 public:
 	bool IsRunning() { return window->IsOpen(); };
 
-	void Init();
+	void Start();
 	void Update();
 	void Render();
-	void Exit();
+	void Lose();
 };

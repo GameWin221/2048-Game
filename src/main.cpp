@@ -4,7 +4,7 @@ int main()
 {
 	GameLoop game;
 	
-	game.Init();
+	game.Start();
 	
 	while (game.IsRunning())
 	{
@@ -12,7 +12,7 @@ int main()
 		game.Render();
 	}
 	
-	game.Exit();
+	game.Lose();
 	
 	return 0;
 }

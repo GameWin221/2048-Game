@@ -1,17 +1,17 @@
 #include "GameLoop.hpp"
 
-void GameLoop::Init()
+void GameLoop::Start()
 {
 	window = new Window(glm::uvec2(1024, 1224), "2048");
 
-	int size = 4;
+	const int size = 4;
 
 	grid = new Grid(size);
 
 	horror = new Font("Fonts/horror.ttf", 128);
 
-	scoreDisplay = new ScoreDisplay();
-	fpsDisplay = new FPSDisplay();
+	scoreDisplay = new ScoreDisplay;
+	fpsDisplay = new FPSDisplay;
 }
 void GameLoop::Update()
 {
@@ -61,6 +61,6 @@ void GameLoop::Render()
 
 	window->Display();
 }
-void GameLoop::Exit()
+void GameLoop::Lose()
 {
 }
