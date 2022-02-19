@@ -6,7 +6,6 @@ Button::Button(Sprite* buttonSprite)
 	this->sprite = buttonSprite;
 	this->wasPressed = false;
 }
-Button::~Button(){}
 
 void Button::OnPress()
 {

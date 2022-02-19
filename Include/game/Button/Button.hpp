@@ -16,7 +16,6 @@ protected:
 
 public:
 	Button(Sprite* buttonSprite);
-	~Button();
 
 	virtual void OnPress();
 

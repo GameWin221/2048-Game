@@ -55,6 +55,7 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->value = val;
 
 	this->deleteQueued = false;
+	this->promoteQueued = false;
 
 	this->sprite = new Sprite(blockTexture, glm::vec2(0), 0.95f * glm::vec2(gridOffset/2.0));
 	this->sprite->color = ColorLUT(this->value);
@@ -73,7 +74,9 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 }
 Block::~Block()
 {
-
+	Tu sie psuje destruktor
+	this->valueText->~Text();
+	this->sprite->~Sprite();
 }
 
 void Block::Render()

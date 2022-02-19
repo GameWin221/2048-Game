@@ -29,7 +29,11 @@ Text::Text(Font* newFont, std::string newText, float newScale, glm::vec3 newColo
 
     this->SetString(this->text);
 }
-Text::~Text(){};
+Text::~Text()
+{
+    glDeleteBuffers(1, &this->VBO);
+    glDeleteVertexArrays(1, &this->VAO);
+};
 
 void Text::SetString(std::string newText)
 {

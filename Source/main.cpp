@@ -1,6 +1,6 @@
 #include "game/GameLoop.hpp"
 
-TODO
+//TODO
 // Naprawic Undo
 // Naprawic Lose (przegrywanie)
 

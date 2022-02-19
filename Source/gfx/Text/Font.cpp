@@ -100,7 +100,10 @@ Font::Font(std::string fontPath, int fontSize)
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 }
-Font::~Font(){}
+Font::~Font()
+{
+    glDeleteTextures(1, &textureAtlas);
+}
 
 Font* Font::DefaultFont()
 {

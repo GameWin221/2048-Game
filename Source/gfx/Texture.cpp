@@ -36,7 +36,7 @@ Texture::Texture(std::string name)
 	}
 	else
 		std::cout << "Failed to load texture: \"" << name << "\"\n";
-	
+
 	stbi_image_free(data);
 }
 

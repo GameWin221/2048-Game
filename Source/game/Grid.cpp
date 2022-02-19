@@ -138,7 +138,6 @@ Grid::Grid(unsigned int size)
 
 	this->blockMoveSpeed = 2500.0f * (wX / 1024.0f); // Scale the block movement speed relatively to the window size (the game was developed on a 1024x1224 window)
 }
-Grid::~Grid(){}
 
 void Grid::Update(const double& deltaTime, ScoreDisplay* scoreDisplay)
 {

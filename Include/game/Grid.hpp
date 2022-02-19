@@ -26,7 +26,6 @@ private:
 
 public:
 	Grid(unsigned int size);
-	~Grid();
 
 	std::vector<Block> blocks;
 
