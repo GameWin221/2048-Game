@@ -27,9 +27,9 @@ private:
 public:
 	Grid(unsigned int size);
 
-	std::vector<Block> blocks;
+	std::vector<Block*> blocks;
 
-	std::vector<Block> lastBlocks; // For Undo
+	std::vector<Block*> lastBlocks; // For Undo
 
 	void Update(const double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();

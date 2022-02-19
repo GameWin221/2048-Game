@@ -14,9 +14,10 @@ private:
 
 	int score;
 	int bestScore;
-	int lastScore;
 
 public:
+	int lastScore;
+
 	void AddScore(int deltaScore);
 	void SetScore(int targetScore);
 	const int& GetScore() const;

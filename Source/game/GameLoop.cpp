@@ -4,7 +4,7 @@ void GameLoop::Start()
 {
 	window = new Window(glm::uvec2(900, 1024), "2048");
 
-	const int size = 2;
+	const int size = 64;
 
 	grid = new Grid(size);
 
@@ -59,7 +59,7 @@ void GameLoop::Render()
 	grid->Render();
 
 	for (auto& block : grid->blocks)
-		block.Render();
+		block->Render();
 
 	restartButton->Render();
 	undoButton->Render();
@@ -67,7 +67,7 @@ void GameLoop::Render()
 	Text::InitInstancing();
 
 	for (auto& block : grid->blocks)
-		block.RenderText();
+		block->RenderText();
 
 	scoreDisplay->Render();
 	fpsDisplay->Render();

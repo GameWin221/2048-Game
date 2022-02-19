@@ -74,10 +74,8 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 }
 Block::~Block()
 {
-	//Tu sie psuje destruktor
-	//this->valueText->~Text();
-	//delete this->valueText;
-	//this->sprite->~Sprite();
+	delete this->valueText;
+	delete this->sprite;
 }
 
 void Block::Render()
