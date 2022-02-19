@@ -119,12 +119,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\GLEW\include;$(SolutionDir)include\GLFW\include;$(SolutionDir)include\GLM\include;$(SolutionDir)include\STB;$(SolutionDir)include\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\GLEW\include;$(SolutionDir)External\GLFW\include;$(SolutionDir)External\GLM\include;$(SolutionDir)External\STB;$(SolutionDir)External\FreeType\include;$(SolutionDir)Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)include\GLEW\lib;$(SolutionDir)include\GLFW\lib;$(SolutionDir)include\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\GLEW\lib;$(SolutionDir)External\GLFW\lib;$(SolutionDir)External\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -138,32 +138,35 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpplatest</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\CL;$(SolutionDir)include\GLEW\include;$(SolutionDir)include\GLFW\include;$(SolutionDir)include\GLM\include;$(SolutionDir)include\ImGui;$(SolutionDir)include\STB;$(SolutionDir)include\FreeType\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\CL;$(SolutionDir)External\GLEW\include;$(SolutionDir)External\GLFW\include;$(SolutionDir)External\GLM\include;$(SolutionDir)External\STB;$(SolutionDir)External\FreeType\include;$(SolutionDir)Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)include\GLEW\lib;$(SolutionDir)include\GLFW\lib;$(SolutionDir)include\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\GLEW\lib;$(SolutionDir)External\GLFW\lib;$(SolutionDir)External\FreeType\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\ScoreDisplay.cpp" />
-    <ClCompile Include="src\Font.cpp" />
-    <ClCompile Include="include\STB\stb_image.cpp" />
-    <ClCompile Include="src\Block.cpp" />
-    <ClCompile Include="src\FPSDisplay.cpp" />
-    <ClCompile Include="src\GameLoop.cpp" />
-    <ClCompile Include="src\Grid.cpp" />
-    <ClCompile Include="src\Input.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Shader.cpp" />
-    <ClCompile Include="src\Sprite.cpp" />
-    <ClCompile Include="src\Text.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
-    <ClCompile Include="src\Window.cpp" />
+    <ClCompile Include="Source\game\Button\Button.cpp" />
+    <ClCompile Include="Source\game\Button\RestartButton.cpp" />
+    <ClCompile Include="Source\game\ScoreDisplay.cpp" />
+    <ClCompile Include="Source\gfx\Text\Font.cpp" />
+    <ClCompile Include="External\STB\stb_image.cpp" />
+    <ClCompile Include="Source\game\Block.cpp" />
+    <ClCompile Include="Source\game\FPSDisplay.cpp" />
+    <ClCompile Include="Source\game\GameLoop.cpp" />
+    <ClCompile Include="Source\game\Grid.cpp" />
+    <ClCompile Include="Source\game\Input.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\gfx\Shader.cpp" />
+    <ClCompile Include="Source\gfx\Sprite.cpp" />
+    <ClCompile Include="Source\gfx\Text\Text.cpp" />
+    <ClCompile Include="Source\gfx\Texture.cpp" />
+    <ClCompile Include="Source\gfx\Window.cpp" />
+    <ClCompile Include="Source\game\Button\UndoButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fragment.glsl" />
@@ -172,19 +175,22 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\ScoreDisplay.hpp" />
-    <ClInclude Include="src\Font.hpp" />
-    <ClInclude Include="src\Block.hpp" />
-    <ClInclude Include="src\Direction.hpp" />
-    <ClInclude Include="src\FPSDisplay.hpp" />
-    <ClInclude Include="src\GameLoop.hpp" />
-    <ClInclude Include="src\Grid.hpp" />
-    <ClInclude Include="src\Input.hpp" />
-    <ClInclude Include="src\Shader.hpp" />
-    <ClInclude Include="src\Sprite.hpp" />
-    <ClInclude Include="src\Text.hpp" />
-    <ClInclude Include="src\Texture.hpp" />
-    <ClInclude Include="src\Window.hpp" />
+    <ClInclude Include="Include\game\Button\Button.hpp" />
+    <ClInclude Include="Include\game\Button\RestartButton.hpp" />
+    <ClInclude Include="Include\game\ScoreDisplay.hpp" />
+    <ClInclude Include="Include\gfx\Text\Font.hpp" />
+    <ClInclude Include="Include\game\Block.hpp" />
+    <ClInclude Include="Include\game\Direction.hpp" />
+    <ClInclude Include="Include\game\FPSDisplay.hpp" />
+    <ClInclude Include="Include\game\GameLoop.hpp" />
+    <ClInclude Include="Include\game\Grid.hpp" />
+    <ClInclude Include="Include\game\Input.hpp" />
+    <ClInclude Include="Include\gfx\Shader.hpp" />
+    <ClInclude Include="Include\gfx\Sprite.hpp" />
+    <ClInclude Include="Include\gfx\Text\Text.hpp" />
+    <ClInclude Include="Include\gfx\Texture.hpp" />
+    <ClInclude Include="Include\gfx\Window.hpp" />
+    <ClInclude Include="Include\game\Button\UndoButton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
