@@ -95,7 +95,7 @@ void ScoreDisplay::SaveBestScore()
 
 	std::getline(file, bestScoreString);
 	const int bestScoreInt = std::stoi(bestScoreString);
-	std::cout << "Saved HS: " << bestScoreInt << '\n';
+
 	// If the previous high score was lower then the current score
 	if(bestScoreInt < this->score)
 	{
