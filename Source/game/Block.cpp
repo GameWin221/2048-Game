@@ -72,11 +72,6 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 
 	this->mergeToID = -1;
 }
-Block::~Block()
-{
-	delete this->valueText;
-	delete this->sprite;
-}
 
 void Block::Render()
 {

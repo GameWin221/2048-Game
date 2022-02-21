@@ -9,7 +9,6 @@
 
 #include "game/Button/Button.hpp"
 #include "game/Button/RestartButton.hpp"
-#include "game/Button/UndoButton.hpp"
 
 #include "gfx/Text/Text.hpp"
 #include "gfx/Text/Font.hpp"
@@ -29,7 +28,6 @@ private:
 	FPSDisplay* fpsDisplay;
 
 	RestartButton* restartButton;
-	UndoButton* undoButton;
 
 public:
 	bool IsRunning() { return window->IsOpen(); };

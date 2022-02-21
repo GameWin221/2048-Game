@@ -53,12 +53,6 @@ void ScoreDisplay::Render()
 	this->bestScoreText->Render();
 }
 
-void ScoreDisplay::UndoScore()
-{
-	this->score = lastScore;
-	this->SetScore(this->lastScore);
-}
-
 void ScoreDisplay::AddScore(int deltaScore)
 {
 	int newTarget = this->score + deltaScore;
@@ -66,8 +60,6 @@ void ScoreDisplay::AddScore(int deltaScore)
 }
 void ScoreDisplay::SetScore(int targetScore)
 {
-	this->lastScore = this->score;
-
 	this->score = targetScore;
 	this->scoreText->SetString("Score: " + std::to_string(this->score));
 }

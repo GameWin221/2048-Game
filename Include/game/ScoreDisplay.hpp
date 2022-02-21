@@ -16,8 +16,6 @@ private:
 	int bestScore;
 
 public:
-	int lastScore;
-
 	void AddScore(int deltaScore);
 	void SetScore(int targetScore);
 	const int& GetScore() const;
@@ -28,8 +26,6 @@ public:
 	void SaveBestScore();
 
 	void Render();
-
-	void UndoScore();
 
 	ScoreDisplay();
 	~ScoreDisplay();

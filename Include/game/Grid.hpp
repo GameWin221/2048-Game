@@ -27,15 +27,12 @@ private:
 public:
 	Grid(unsigned int size);
 
-	std::vector<Block*> blocks;
-
-	std::vector<Block*> lastBlocks; // For Undo
+	std::vector<Block> blocks;
 
 	void Update(const double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();
 
 	void Reset();
-	void UndoBlocks();
 
 	void AddBlock(glm::vec2 spawnPos, int spawnValue);
 	void SpawnRandomBlock();

@@ -16,9 +16,6 @@ struct Target
 
 class Block
 {
-private:
-	Text* valueText;
-
 public:
 	void Render();
 	void RenderText();
@@ -30,6 +27,7 @@ public:
 	bool deleteQueued;
 	
 	Sprite* sprite;
+	Text* valueText;
 	Target target;
 
 	// The index of a block it's going to merge with
@@ -39,7 +37,6 @@ public:
 	glm::ivec2 targetGridPos;
 
 	Block(glm::ivec2 pos, const float& gridOffset, int val);
-	~Block();
 
 	Block(const Block& other) 
 	{

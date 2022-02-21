@@ -18,7 +18,6 @@ void GameLoop::Start()
 	fpsDisplay = new FPSDisplay;
 
 	restartButton = new RestartButton(grid, scoreDisplay);
-	undoButton = new UndoButton(grid, scoreDisplay);
 }
 void GameLoop::Update()
 {
@@ -27,7 +26,6 @@ void GameLoop::Update()
 	fpsDisplay->UpdateDT();
 
 	restartButton->CheckPress();
-	undoButton->CheckPress();
 
 	// If pressed W/Up Arrow
 	if (Input::Clicked(Up))
@@ -59,15 +57,14 @@ void GameLoop::Render()
 	grid->Render();
 
 	for (auto& block : grid->blocks)
-		block->Render();
+		block.Render();
 
 	restartButton->Render();
-	undoButton->Render();
 
 	Text::InitInstancing();
 
 	for (auto& block : grid->blocks)
-		block->RenderText();
+		block.RenderText();
 
 	scoreDisplay->Render();
 	fpsDisplay->Render();

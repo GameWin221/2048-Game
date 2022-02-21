@@ -166,7 +166,6 @@
     <ClCompile Include="Source\gfx\Text\Text.cpp" />
     <ClCompile Include="Source\gfx\Texture.cpp" />
     <ClCompile Include="Source\gfx\Window.cpp" />
-    <ClCompile Include="Source\game\Button\UndoButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fragment.glsl" />
@@ -190,7 +189,6 @@
     <ClInclude Include="Include\gfx\Text\Text.hpp" />
     <ClInclude Include="Include\gfx\Texture.hpp" />
     <ClInclude Include="Include\gfx\Window.hpp" />
-    <ClInclude Include="Include\game\Button\UndoButton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
