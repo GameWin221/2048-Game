@@ -4,15 +4,11 @@ void GameLoop::Start()
 {
 	window = new Window(glm::uvec2(900, 1024), "2048");
 
-	const int size = 64;
+	const int size = 4;
 
 	grid = new Grid(size);
 
-	for (int x = 0; x < size; x++)
-		for (int y = 0; y < size; y++)
-			grid->AddBlock(glm::ivec2(x, y), 2);
-
-	//grid->SpawnRandomBlock();
+	grid->SpawnRandomBlock();
 
 	scoreDisplay = new ScoreDisplay;
 	fpsDisplay = new FPSDisplay;
