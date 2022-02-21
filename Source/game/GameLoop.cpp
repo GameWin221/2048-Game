@@ -39,6 +39,10 @@ void GameLoop::Update()
 	else if (Input::Clicked(Right))
 		grid->MoveBlocks(Right);
 
+	if (grid->shouldLose)
+		this->Lose();
+
+
 	grid->Update(fpsDisplay->deltaTime, scoreDisplay);
 
 	// Check key states to use in the next frame
@@ -69,4 +73,11 @@ void GameLoop::Render()
 }
 void GameLoop::Lose()
 {
+	restartButton->SetGlow(true);
+
+	grid->Reset();
+	scoreDisplay->SaveBestScore();
+	scoreDisplay->SetScore(0);
+	grid->shouldLose = false;
+	//restartButton->SetGlow(false);
 }

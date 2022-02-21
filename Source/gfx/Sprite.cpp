@@ -49,9 +49,7 @@ void Sprite::InitInstancing()
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
 
-    glm::mat4 proj = glm::mat4(1.0f);
-
-    proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
+    const glm::mat4 proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
     shader->Use();
     shader->SetMat4("projection", proj);

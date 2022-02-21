@@ -9,17 +9,21 @@ ScoreDisplay::ScoreDisplay()
 	std::ifstream file("BestScore.txt");
 	std::string bestScoreString = "";
 
-	if (file.bad())
+	if (!file.is_open())
 	{
 		std::cout << "Could not find BestScore.txt, creating it now...\n";
 
 		std::ofstream newFile("BestScore.txt");
 		newFile << "0";
 		newFile.close();
+
+		file.open("BestScore.txt");
 	}
 
 	std::getline(file, bestScoreString);
-	this->bestScore = std::stoi(bestScoreString);
+
+	if(bestScoreString.length() > 0 && std::isdigit(bestScoreString[0]))
+		this->bestScore = std::stoi(bestScoreString);
 
 	file.close();
 
@@ -82,7 +86,7 @@ const int& ScoreDisplay::GetBestScore() const
 void ScoreDisplay::SaveBestScore()
 {
 	// Loading the best score
-	std::fstream file("BestScore.txt");
+	std::fstream file("BestScore.txt", std::ofstream::in | std::ofstream::out);
 	std::string bestScoreString = "";
 
 	std::getline(file, bestScoreString);
@@ -92,8 +96,8 @@ void ScoreDisplay::SaveBestScore()
 	if(bestScoreInt < this->score)
 	{
 		// Clearing the file
-		std::ofstream clr("test.txt", std::ofstream::out | std::ofstream::trunc);
-		clr.close();
+		file.close();
+		file.open("BestScore.txt", std::ofstream::in | std::ofstream::out);
 
 		file << std::to_string(this->score);
 		this->SetBestScore(this->score);

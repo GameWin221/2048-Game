@@ -10,15 +10,19 @@
 
 class RestartButton : public Button
 {
-protected:
-	RestartButton(); // For inheritance
+private:
+	glm::vec3 defaultColor;
+	glm::vec3 glowColor;
 
+protected:
 	Grid* grid;
 	ScoreDisplay* score;
 
 public:
 	RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay);
 	~RestartButton();
+
+	void SetGlow(bool glow);
 
 	virtual void OnPress();
 };

@@ -2,9 +2,9 @@
 
 Texture* gridTexture = nullptr;
 
-glm::ivec2 DirToVec(Direction& dir)
+glm::ivec2 DirToVec(const Direction& dir)
 {
-	glm::ivec2 vec;
+	glm::ivec2 vec(0);
 
 	switch (dir)
 	{
@@ -36,10 +36,10 @@ void Switch(std::vector<Block>& blocks, int &index)
 bool Grid::CanMergeAnyBlock()
 {
 	int bID = 0;
-	for (auto& block : this->blocks)
+	for (const auto& block : this->blocks)
 	{
 		int cbID = 0;
-		for (auto checkedBlock : this->blocks)
+		for (const auto& checkedBlock : this->blocks)
 		{
 			// If not checking itself
 			if (bID != cbID)
@@ -57,6 +57,7 @@ bool Grid::CanMergeAnyBlock()
 
 	return false;
 }
+
 void Grid::SortBlocks(Direction& dir)
 {
 	bool checkX;
@@ -216,14 +217,7 @@ void Grid::Update(const double& deltaTime, ScoreDisplay* scoreDisplay)
 		if(this->blocks.size() >= gridSize*gridSize)
 		{
 			if (!CanMergeAnyBlock())
-			{
-				std::cout << "You lost! (Zmien to pozniej w Grid::Update())\n";
-				std::this_thread::sleep_for(std::chrono::seconds(1));
-
-				this->Reset();
-				scoreDisplay->SaveBestScore();
-				scoreDisplay->SetScore(0);
-			}
+				this->shouldLose = true;
 		}
 	}
 }
@@ -236,12 +230,12 @@ void Grid::MoveBlocks(Direction dir)
 {
 	if (!this->blocksMoving)
 	{
-		this->canSpawnBlock = true;
-
 		const glm::ivec2 vDir = DirToVec(dir);
 
 		// Sort the blocks in order to move them in a correct order
 		this->SortBlocks(dir);
+
+		bool anyBlockWillMove = false;
 		
 		int bID = 0;
 		for (auto& block : this->blocks)
@@ -253,9 +247,9 @@ void Grid::MoveBlocks(Direction dir)
 			{
 				const glm::ivec2 newPos = block.targetGridPos + vDir;
 
-				// Check if the block won't go outside of the map
+				// Check if the block will go outside of the map
 				if (newPos.x < 0 || newPos.y < 0 || newPos.x >= this->gridSize || newPos.y >= this->gridSize)
-					isOccupied = true;
+					break;
 
 				int cbID = 0;
 				// Check if the block won't collide with other
@@ -276,6 +270,8 @@ void Grid::MoveBlocks(Direction dir)
 								block.deleteQueued = true;
 								block.mergeToID = cbID;
 								block.targetGridPos = checkedBlock.targetGridPos;
+
+								anyBlockWillMove = true;
 							}
 
 							break;
@@ -286,7 +282,10 @@ void Grid::MoveBlocks(Direction dir)
 
 				// Move the block if possible
 				if (!isOccupied)
+				{
 					block.targetGridPos = newPos;
+					anyBlockWillMove = true;
+				}
 			}
 
 			bID++;
@@ -307,6 +306,8 @@ void Grid::MoveBlocks(Direction dir)
 			block.target.distanceTravelled = distanceTravelled;
 		}
 		
+		if(anyBlockWillMove)
+			this->canSpawnBlock = true;
 	}
 }
 

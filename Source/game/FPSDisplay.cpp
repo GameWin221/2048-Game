@@ -5,7 +5,7 @@ FPSDisplay::FPSDisplay()
 	int wX, wY;
 	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wY);
 	glm::vec2 position(wX, wY);
-	position.x *= 0.75f;
+	position.x *= 0.7f;
 	position.y *= 0.95f;
 
 	this->fpsText = new Text(Font::DefaultFont(), "FPS: ");

@@ -2,9 +2,11 @@
 
 Texture* restartTexture = nullptr;
 
-RestartButton::RestartButton() {} // For inheritance
 RestartButton::RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay)
 {
+	this->defaultColor = glm::vec3(1.0f);
+	this->glowColor = glm::vec3(1.0f, 1.0f, 0.1f);
+
 	this->grid = mainGrid;
 	this->score = mainScoreDisplay;
 
@@ -16,7 +18,7 @@ RestartButton::RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay)
 
 	this->sprite = new Sprite(restartTexture);
 	this->sprite->size = glm::vec2((float)wX/16.0f);
-	this->sprite->color = glm::vec3(1.0f, 1.0f, 0.0f);
+	this->sprite->color = defaultColor;
 
 	this->sprite->position = glm::vec2(wX, wY);
 	this->sprite->position.x *= 0.86f;
@@ -24,6 +26,14 @@ RestartButton::RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay)
 }
 
 RestartButton::~RestartButton(){}
+
+void RestartButton::SetGlow(bool glow)
+{
+	if (glow)
+		this->sprite->color = this->glowColor;
+	else
+		this->sprite->color = this->defaultColor;
+}
 
 void RestartButton::OnPress()
 {

@@ -29,6 +29,8 @@ public:
 
 	std::vector<Block> blocks;
 
+	bool shouldLose;
+
 	void Update(const double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();
 

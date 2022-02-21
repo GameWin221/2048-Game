@@ -100,15 +100,12 @@ Font* Text::GetFont()
 
 void Text::InitInstancing()
 {
-    textShader->Use();
-    
     int windowX, windowY;
     glfwGetFramebufferSize(glfwGetCurrentContext(), &windowX, &windowY);
 
-    glm::mat4 proj = glm::mat4(1.0f);
+    const glm::mat4 proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
 
-    proj = glm::ortho(0.0f, (float)windowX, 0.0f, (float)windowY, 0.1f, 1.5f);
-
+    textShader->Use();
     textShader->SetMat4("projection", proj);
     textShader->SetInt("text", 0);
 

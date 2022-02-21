@@ -1,8 +1,9 @@
 #include "game/GameLoop.hpp"
 
 //TODO
-// Naprawic Undo
-// Naprawic Lose (przegrywanie)
+// (Glitch) Blocks are slightly flickering/teleporting after moving
+// Make Lose() better
+// Save the game after closing the window
 
 int main()
 {
@@ -15,8 +16,4 @@ int main()
 		game.Update();
 		game.Render();
 	}
-	
-	game.Lose();
-	
-	return 0;
 }
