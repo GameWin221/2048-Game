@@ -62,6 +62,9 @@ void ScoreDisplay::AddScore(int deltaScore)
 }
 void ScoreDisplay::SetScore(int targetScore)
 {
+	if (this->bestScore < targetScore)
+		this->SetBestScore(targetScore);
+
 	this->score = targetScore;
 	this->scoreText->SetString("Score: " + std::to_string(this->score));
 }

@@ -9,7 +9,6 @@ namespace GameLoop
 	FPSDisplay* fpsDisplay;
 
 	RestartButton* restartButton;
-
 	LoseScreen* loseScreen;
 
 	void Start(const int& arg)
