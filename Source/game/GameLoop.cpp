@@ -12,15 +12,12 @@ namespace GameLoop
 
 	LoseScreen* loseScreen;
 
-	void Start()
+	void Start(const int& arg)
 	{
 		window = new Window(glm::uvec2(900, 1024), "2048");
-
 		glfwSetWindowCloseCallback(window->glfwWindow, Exit);
 
-		const int size = 4;
-
-		grid = new Grid(size);
+		grid = new Grid(arg);
 
 		scoreDisplay  = new ScoreDisplay(grid->gridSize);
 		fpsDisplay	  = new FPSDisplay;

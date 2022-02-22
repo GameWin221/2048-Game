@@ -75,7 +75,6 @@ void ScoreDisplay::SetBestScore(int targetBestScore)
 	this->bestScore = targetBestScore;
 	this->bestScoreText->SetString("Best Score: " + std::to_string(this->bestScore));
 }
-
 const int& ScoreDisplay::GetBestScore() const
 {
 	return this->bestScore;

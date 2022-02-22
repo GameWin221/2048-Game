@@ -26,7 +26,7 @@ namespace GameLoop
 {
 	bool IsRunning();
 
-	void Start();
+	void Start(const int& arg);
 	void Update();
 	void Render();
 	void Exit(GLFWwindow* window);
