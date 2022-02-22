@@ -20,6 +20,16 @@ struct point {
 	GLfloat y;
 	GLfloat s;
 	GLfloat t;
+
+	point operator=(const point& other)
+	{
+		this->x = other.x;
+		this->y = other.y;
+		this->s = other.s;
+		this->t = other.t;
+
+		return *this;
+	}
 };
 
 class Text

@@ -45,7 +45,7 @@ void Text::SetString(std::string newText)
     vertices.clear();
     for (auto& c : this->text)
     {
-        const Character character = this->font->characters[c];
+        const Character& character = this->font->characters[c];
 
         float x2 = x + character.pivot.x;
         float y2 = -y - character.pivot.y;
@@ -60,20 +60,20 @@ void Text::SetString(std::string newText)
         const glm::ivec2 atlasSize = this->font->GetAtlasSize();
 
         point pt = { x2, -y2, character.offset.x, character.offset.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
         pt = { x2 + w, -y2    , character.offset.x + character.size.x / atlasSize.x, character.offset.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
         pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / atlasSize.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
         pt = { x2 + w, -y2 - h, character.offset.x + character.size.x / atlasSize.x, character.offset.y + character.size.y / atlasSize.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
         pt = { x2,     -y2 - h, character.offset.x, character.offset.y + character.size.y / atlasSize.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
         pt = { x2 + w, -y2    , character.offset.x + character.size.x / atlasSize.x, character.offset.y };
-        vertices.push_back(pt);
+        vertices.emplace_back(pt);
     }
 
-    const Character firstChar = this->font->characters[this->text[0]];
+    const Character& firstChar = this->font->characters[this->text[0]];
     this->textBounds = glm::vec2(x, firstChar.size.y);
 
     glBindVertexArray(this->VAO);

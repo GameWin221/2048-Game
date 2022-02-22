@@ -36,7 +36,6 @@ Sprite::Sprite(Texture* tex, glm::vec2 pos, glm::vec2 siz, glm::vec3 col)
         shader = new Shader("Resources/Shaders/vertex.glsl", "Resources/Shaders/fragment.glsl");
     }
 
-
     this->texture  = tex;
     this->position = pos;
     this->color    = col;

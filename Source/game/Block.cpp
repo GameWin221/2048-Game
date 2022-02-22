@@ -73,7 +73,7 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->mergeToID = -1;
 }
 
-void Block::Render()
+void Block::RenderSprite()
 {
 	this->sprite->Render();
 }

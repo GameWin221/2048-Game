@@ -14,7 +14,6 @@ class Grid
 private:
 	Sprite* sprite;
 
-	unsigned int gridSize;
 	float gridOffset;
 
 	bool canSpawnBlock;
@@ -29,14 +28,16 @@ public:
 
 	std::vector<Block> blocks;
 
-	bool shouldLose;
+	unsigned int gridSize;
+
+	bool shouldLose, lost;
 
 	void Update(const double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();
 
 	void Reset();
 
-	void AddBlock(glm::vec2 spawnPos, int spawnValue);
+	void AddBlock(glm::ivec2 spawnPos, int spawnValue);
 	void SpawnRandomBlock();
 
 	void MoveBlocks(Direction dir);

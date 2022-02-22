@@ -39,4 +39,5 @@ void RestartButton::OnPress()
 {
 	this->grid->Reset();
 	this->score->SetScore(0);
+	this->SetGlow(false);
 }

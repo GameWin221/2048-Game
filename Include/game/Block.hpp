@@ -17,7 +17,7 @@ struct Target
 class Block
 {
 public:
-	void Render();
+	void RenderSprite();
 	void RenderText();
 	void Promote();
 

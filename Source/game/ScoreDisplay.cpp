@@ -1,23 +1,21 @@
 #include "game/ScoreDisplay.hpp"
 
-ScoreDisplay::ScoreDisplay()
+ScoreDisplay::ScoreDisplay(const int& gridSize)
 {
 	this->score = 0;
 	this->bestScore = 0;
 
 	// Loading the best score
-	std::ifstream file("BestScore.txt");
+	std::ifstream file("Saves/best" + std::to_string(gridSize) + ".save");
 	std::string bestScoreString = "";
 
 	if (!file.is_open())
 	{
-		std::cout << "Could not find BestScore.txt, creating it now...\n";
-
-		std::ofstream newFile("BestScore.txt");
+		std::ofstream newFile("Saves/best" + std::to_string(gridSize) + ".save");
 		newFile << "0";
 		newFile.close();
 
-		file.open("BestScore.txt");
+		file.open("Saves/best" + std::to_string(gridSize) + ".save");
 	}
 
 	std::getline(file, bestScoreString);
@@ -83,10 +81,10 @@ const int& ScoreDisplay::GetBestScore() const
 	return this->bestScore;
 }
 
-void ScoreDisplay::SaveBestScore()
+void ScoreDisplay::SaveBestScore(const int& gridSize)
 {
 	// Loading the best score
-	std::fstream file("BestScore.txt", std::ofstream::in | std::ofstream::out);
+	std::fstream file("Saves/best" +std::to_string(gridSize) + ".save", std::ofstream::in | std::ofstream::out);
 	std::string bestScoreString = "";
 
 	std::getline(file, bestScoreString);
@@ -97,7 +95,7 @@ void ScoreDisplay::SaveBestScore()
 	{
 		// Clearing the file
 		file.close();
-		file.open("BestScore.txt", std::ofstream::in | std::ofstream::out);
+		file.open("Saves/best" + std::to_string(gridSize) + ".save", std::ofstream::in | std::ofstream::out);
 
 		file << std::to_string(this->score);
 		this->SetBestScore(this->score);

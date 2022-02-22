@@ -2,18 +2,18 @@
 
 //TODO
 // (Glitch) Blocks are slightly flickering/teleporting after moving
-// Make Lose() better
-// Save the game after closing the window
+// Make the game look good (Change color pallette)
+// Maybe motion blur?
+
+using namespace GameLoop;
 
 int main()
 {
-	GameLoop game;
+	Start();
 	
-	game.Start();
-	
-	while (game.IsRunning())
+	while (IsRunning())
 	{
-		game.Update();
-		game.Render();
+		Update();
+		Render();
 	}
 }

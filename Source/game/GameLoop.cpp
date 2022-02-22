@@ -1,83 +1,122 @@
 #include "game/GameLoop.hpp"
 
-void GameLoop::Start()
+namespace GameLoop
 {
-	window = new Window(glm::uvec2(900, 1024), "2048");
+	Window* window;
+	Grid* grid;
 
-	const int size = 4;
+	ScoreDisplay* scoreDisplay;
+	FPSDisplay* fpsDisplay;
 
-	grid = new Grid(size);
+	RestartButton* restartButton;
 
-	grid->SpawnRandomBlock();
+	LoseScreen* loseScreen;
 
-	scoreDisplay = new ScoreDisplay;
-	fpsDisplay = new FPSDisplay;
+	void Start()
+	{
+		window = new Window(glm::uvec2(900, 1024), "2048");
 
-	restartButton = new RestartButton(grid, scoreDisplay);
-}
-void GameLoop::Update()
-{
-	window->PollEvents();
+		glfwSetWindowCloseCallback(window->glfwWindow, Exit);
 
-	fpsDisplay->UpdateDT();
+		const int size = 4;
 
-	restartButton->CheckPress();
+		grid = new Grid(size);
 
-	// If pressed W/Up Arrow
-	if (Input::Clicked(Up))
-		grid->MoveBlocks(Up);
+		scoreDisplay  = new ScoreDisplay(grid->gridSize);
+		fpsDisplay	  = new FPSDisplay;
+		loseScreen	  = new LoseScreen;
+		restartButton = new RestartButton(grid, scoreDisplay);
 
-	// If pressed S/Down Arrow
-	else if (Input::Clicked(Down))
-		grid->MoveBlocks(Down);
+		if (GameLoader::SaveExists(grid))
+			GameLoader::Load(grid, scoreDisplay);
+		else
+			grid->SpawnRandomBlock();
+	}
+	void Update()
+	{
+		window->PollEvents();
 
-	// If pressed A/Left Arrow
-	if (Input::Clicked(Left))
-		grid->MoveBlocks(Left);
+		fpsDisplay->UpdateDT();
 
-	// If pressed D/Right Arrow
-	else if (Input::Clicked(Right))
-		grid->MoveBlocks(Right);
+		restartButton->CheckPress();
 
-	if (grid->shouldLose)
-		this->Lose();
+		// If the player didn't lose yet
+		if (!grid->lost)
+		{
+			// If pressed W/Up Arrow
+			if (Input::Clicked(Up))
+				grid->MoveBlocks(Up);
+
+			// If pressed S/Down Arrow
+			else if (Input::Clicked(Down))
+				grid->MoveBlocks(Down);
+
+			// If pressed A/Left Arrow
+			if (Input::Clicked(Left))
+				grid->MoveBlocks(Left);
+
+			// If pressed D/Right Arrow
+			else if (Input::Clicked(Right))
+				grid->MoveBlocks(Right);
+
+			if (grid->shouldLose)
+				Lose();
+
+			grid->Update(fpsDisplay->deltaTime, scoreDisplay);
+
+			loseScreen->SetVisibility(false);
+		}
+		else
+			loseScreen->SetVisibility(true);
+
+		// Check key states to use in the next frame
+		Input::UpdateOldInputs();
+	}
+	void Render()
+	{
+		window->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+
+		Sprite::InitInstancing();
+
+		grid->Render();
+
+		for (auto& block : grid->blocks)
+			block.RenderSprite();
+
+		restartButton->Render();
+
+		Text::InitInstancing();
+
+		for (auto& block : grid->blocks)
+			block.RenderText();
+
+		scoreDisplay->Render();
+		fpsDisplay->Render();
 
 
-	grid->Update(fpsDisplay->deltaTime, scoreDisplay);
+		loseScreen->Render();
 
-	// Check key states to use in the next frame
-	Input::UpdateOldInputs();
-}
-void GameLoop::Render()
-{
-	window->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		window->Display();
+	}
+	void Exit(GLFWwindow* window)
+	{
+		GameLoader::Save(grid, scoreDisplay);
 
-	Sprite::InitInstancing();
+		scoreDisplay->SaveBestScore(grid->gridSize);
+		glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+	void Lose()
+	{
+		restartButton->SetGlow(true);
 
-	grid->Render();
+		scoreDisplay->SaveBestScore(grid->gridSize);
 
-	for (auto& block : grid->blocks)
-		block.Render();
+		grid->shouldLose = false;
+		grid->lost = true;
+	}
 
-	restartButton->Render();
-
-	Text::InitInstancing();
-
-	for (auto& block : grid->blocks)
-		block.RenderText();
-
-	scoreDisplay->Render();
-	fpsDisplay->Render();
-		
-	window->Display();
-}
-void GameLoop::Lose()
-{
-	restartButton->SetGlow(true);
-
-	grid->Reset();
-	scoreDisplay->SaveBestScore();
-	scoreDisplay->SetScore(0);
-	grid->shouldLose = false;
-	//restartButton->SetGlow(false);
+	bool IsRunning()
+	{
+		return window->IsOpen();
+	}
 }

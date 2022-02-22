@@ -150,6 +150,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\game\GameLoader.cpp" />
+    <ClCompile Include="Source\game\LoseScreen.cpp" />
     <ClCompile Include="Source\game\Button\Button.cpp" />
     <ClCompile Include="Source\game\Button\RestartButton.cpp" />
     <ClCompile Include="Source\game\ScoreDisplay.cpp" />
@@ -176,6 +178,7 @@
   <ItemGroup>
     <ClInclude Include="Include\game\Button\Button.hpp" />
     <ClInclude Include="Include\game\Button\RestartButton.hpp" />
+    <ClInclude Include="Include\game\GameLoader.hpp" />
     <ClInclude Include="Include\game\ScoreDisplay.hpp" />
     <ClInclude Include="Include\gfx\Text\Font.hpp" />
     <ClInclude Include="Include\game\Block.hpp" />
@@ -189,6 +192,7 @@
     <ClInclude Include="Include\gfx\Text\Text.hpp" />
     <ClInclude Include="Include\gfx\Texture.hpp" />
     <ClInclude Include="Include\gfx\Window.hpp" />
+    <ClInclude Include="Include\game\LoseScreen.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

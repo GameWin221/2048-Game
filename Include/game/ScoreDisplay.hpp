@@ -23,11 +23,11 @@ public:
 	void SetBestScore(int targetBestScore);
 	const int& GetBestScore() const;
 
-	void SaveBestScore();
+	void SaveBestScore(const int& gridSize);
 
 	void Render();
 
-	ScoreDisplay();
+	ScoreDisplay(const int& gridSize);
 	~ScoreDisplay();
 };
 

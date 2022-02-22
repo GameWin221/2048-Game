@@ -134,6 +134,9 @@ Grid::Grid(unsigned int size)
 	this->sprite->texture->tiling = glm::vec2(gridSize*2);
 	this->sprite->color = glm::vec3(0.0f, 0.0f, 0.0f);
 
+	this->shouldLose = false;
+	this->lost = false;
+
 	this->canSpawnBlock = false;
 	this->blocksMoving = false;
 
@@ -318,6 +321,7 @@ void Grid::Reset()
 
 	this->canSpawnBlock = false;
 	this->blocksMoving = false;
+	this->lost = false;
 
 	this->SpawnRandomBlock();
 }
@@ -361,7 +365,7 @@ void Grid::SpawnRandomBlock()
 		this->AddBlock(position, 2);
 	}
 }
-void Grid::AddBlock(glm::vec2 spawnPos, int spawnValue)
+void Grid::AddBlock(glm::ivec2 spawnPos, int spawnValue)
 {
 	this->blocks.emplace_back(Block(spawnPos, this->gridOffset, spawnValue));
 }
