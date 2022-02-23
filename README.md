@@ -1,4 +1,6 @@
 # 2048 Game
  2048 game made with C++ with graphics rendered by OpenGL
 
-# Note that this is an early version
+# Planned features (Will be added soon):
+-Menu for selecting the grid size
+-Prettier textures and color pallette
