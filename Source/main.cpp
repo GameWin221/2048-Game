@@ -1,17 +1,24 @@
+//TODO
+// Make the game look good (Change color pallette, motion blur?)
+// Chosing the grid size (Kinda done)
+// (Glitch) Loading the game after lose causes it to freeze
+
 #include "game/GameLoop.hpp"
 
-//TODO
-// (Glitch) Blocks are slightly flickering/teleporting after moving
-// Make the game look good (Change color pallette, motion blur?)
-// Chosing the grid size
-// Increase the best score everytime score is added (if it's greater than the previous best score of course)
+#define NOMINMAX
+#include <windows.h>
 
 using namespace GameLoop;
 
 int main()
 {
-	const int size = 4;
+	std::cout << "Type in the grid's size (min: 2, max: 32): ";
+	
+	int size;
+	std::cin >> size;
+	size = std::min(std::max(size, 2), 32);
 
+	ShowWindow(GetConsoleWindow(), SW_HIDE);
 	Start(size);
 	
 	while (IsRunning())

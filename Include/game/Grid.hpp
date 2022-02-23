@@ -17,11 +17,12 @@ private:
 	float gridOffset;
 
 	bool canSpawnBlock;
-	bool blocksMoving;
+	bool blocksShouldMove;
+
 	float blockMoveSpeed;
 
 	bool CanMergeAnyBlock();
-	void SortBlocks(Direction& dir);
+	void SortBlocks(const Direction& dir);
 
 public:
 	Grid(unsigned int size);
@@ -31,6 +32,8 @@ public:
 	unsigned int gridSize;
 
 	bool shouldLose, lost;
+	
+	bool CheckLose();
 
 	void Update(const double& deltaTime, ScoreDisplay* scoreDisplay);
 	void Render();
@@ -40,5 +43,5 @@ public:
 	void AddBlock(glm::ivec2 spawnPos, int spawnValue);
 	void SpawnRandomBlock();
 
-	void MoveBlocks(Direction dir);
+	void MoveBlocks(const Direction dir);
 };

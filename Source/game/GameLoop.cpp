@@ -1,8 +1,16 @@
 #include "game/GameLoop.hpp"
 
+// Only for debugging/testing purposes
+const void FillGrid(Grid* grid, const int& size)
+{
+	for (int x = 0; x < size; x++)
+		for (int y = 0; y < size; y++)
+			grid->AddBlock(glm::ivec2(x, y), 2);
+}
+
 namespace GameLoop
 {
-	Window* window;
+	Window* gameWindow;
 	Grid* grid;
 
 	ScoreDisplay* scoreDisplay;
@@ -11,10 +19,10 @@ namespace GameLoop
 	RestartButton* restartButton;
 	LoseScreen* loseScreen;
 
-	void Start(const int& arg)
+	void Start(const unsigned int& arg)
 	{
-		window = new Window(glm::uvec2(900, 1024), "2048");
-		glfwSetWindowCloseCallback(window->glfwWindow, Exit);
+		gameWindow = new Window(glm::uvec2(900, 1024), "2048");
+		glfwSetWindowCloseCallback(gameWindow->glfwWindow, Exit);
 
 		grid = new Grid(arg);
 
@@ -23,16 +31,21 @@ namespace GameLoop
 		loseScreen	  = new LoseScreen;
 		restartButton = new RestartButton(grid, scoreDisplay);
 
+		//FillGrid(grid, arg);
+
 		if (GameLoader::SaveExists(grid))
+		{
 			GameLoader::Load(grid, scoreDisplay);
+			grid->CheckLose();
+		}
 		else
 			grid->SpawnRandomBlock();
 	}
 	void Update()
 	{
-		window->PollEvents();
-
 		fpsDisplay->UpdateDT();
+
+		gameWindow->PollEvents();
 
 		restartButton->CheckPress();
 
@@ -70,7 +83,7 @@ namespace GameLoop
 	}
 	void Render()
 	{
-		window->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		gameWindow->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
 
 		Sprite::InitInstancing();
 
@@ -92,7 +105,7 @@ namespace GameLoop
 
 		loseScreen->Render();
 
-		window->Display();
+		gameWindow->Display();
 	}
 	void Exit(GLFWwindow* window)
 	{
@@ -100,6 +113,7 @@ namespace GameLoop
 
 		scoreDisplay->SaveBestScore(grid->gridSize);
 		glfwSetWindowShouldClose(window, GL_TRUE);
+		gameWindow->Close();
 	}
 	void Lose()
 	{
@@ -113,6 +127,6 @@ namespace GameLoop
 
 	bool IsRunning()
 	{
-		return window->IsOpen();
+		return gameWindow->IsOpen();
 	}
 }

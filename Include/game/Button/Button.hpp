@@ -12,7 +12,7 @@ protected:
 
 	Sprite* sprite;
 
-	bool wasPressed = false;
+	bool mouseWasPressed = false;
 
 public:
 	Button(Sprite* buttonSprite);

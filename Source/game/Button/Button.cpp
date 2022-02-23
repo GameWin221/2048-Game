@@ -4,7 +4,7 @@ Button::Button(){} // For inheritance
 Button::Button(Sprite* buttonSprite)
 {
 	this->sprite = buttonSprite;
-	this->wasPressed = false;
+	this->mouseWasPressed = false;
 }
 
 void Button::OnPress()
@@ -31,18 +31,19 @@ void Button::CheckPress()
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
-		if (!wasPressed)
+		if (!mouseWasPressed)
 		{
+			this->mouseWasPressed = true;
+
 			if (distToCenter.x < this->sprite->size.x &&
 				distToCenter.y < this->sprite->size.y)
 			{
-				this->wasPressed = true;
 				this->OnPress();
 			}
 		}
 	}
 	else
-		this->wasPressed = false;
+		this->mouseWasPressed = false;
 }
 
 void Button::Render()
