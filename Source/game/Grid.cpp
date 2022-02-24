@@ -145,6 +145,10 @@ Grid::Grid(unsigned int size)
 	this->blockMoveSpeed = 2600.0f * (wX / 900.0f); // Scale the block movement speed relatively to the window size
 }
 
+#define PI 3.1415926
+
+// 0.0f - 0.999f
+#define Smoothing 0.75f
 
 void Grid::Update(const double& deltaTime, ScoreDisplay* scoreDisplay)
 {
@@ -167,12 +171,16 @@ void Grid::Update(const double& deltaTime, ScoreDisplay* scoreDisplay)
 			// If the block isn't at its target yet
 			if (block.target.distanceTravelled < block.target.distanceTarget)
 			{
+				const float norm = block.target.distanceTravelled / block.target.distanceTarget;
+				float mult = (1.0f - Smoothing) + (std::sin(norm * PI) * Smoothing);
+				
 				// Move the block towards its target
-				block.target.distanceTravelled += speed;
-				block.sprite->position += -block.target.targetDir * speed;
+				block.target.distanceTravelled += speed * mult;
+				block.sprite->position += -block.target.targetDir * speed * mult;
 			}
-			// If the block is at its target
-			else
+
+			// If the block reached its target
+			if (block.target.distanceTravelled >= block.target.distanceTarget)
 			{
 				// Align the block to the grid
 				block.sprite->position = block.target.targetPos;
