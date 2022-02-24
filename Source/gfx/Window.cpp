@@ -30,7 +30,7 @@ Window::Window(glm::uvec2 size, std::string name)
 
 	//glEnable(GL_MULTISAMPLE);
 
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 
 	glViewport(0, 0, size.x, size.y);
 	glfwSetFramebufferSizeCallback(glfwWindow, framebuffer_size_callback);

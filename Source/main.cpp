@@ -1,7 +1,7 @@
 //TODO
 // Postprocessing (Bloom, Motion blur)
 // Change the default color of the New Game button
-// Chosing the grid size (Kinda done)
+// Chosing the grid size (Kinda done, but I'd like a menu)
 // Linux support
 
 #include "game/GameLoop.hpp"

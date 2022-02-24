@@ -4,7 +4,8 @@ Texture* restartTexture = nullptr;
 
 RestartButton::RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay)
 {
-	this->defaultColor = glm::vec3(0.4f);
+	this->defaultColor = glm::vec3(0.5f, 0.45f, 0.45f);
+	this->highlightedColor = glm::vec3(0.5f);
 	this->glowColor = glm::vec3(247, 154, 32)/255.0f;
 
 	this->grid = mainGrid;

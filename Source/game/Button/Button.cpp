@@ -5,6 +5,9 @@ Button::Button(Sprite* buttonSprite)
 {
 	this->sprite = buttonSprite;
 	this->mouseWasPressed = false;
+
+	this->defaultColor = glm::vec3(1);
+	this->highlightedColor = glm::vec3(0.8);
 }
 
 void Button::OnPress()

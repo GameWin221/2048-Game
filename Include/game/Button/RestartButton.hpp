@@ -11,7 +11,6 @@
 class RestartButton : public Button
 {
 private:
-	glm::vec3 defaultColor;
 	glm::vec3 glowColor;
 
 protected:

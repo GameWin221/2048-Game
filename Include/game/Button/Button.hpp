@@ -12,6 +12,9 @@ protected:
 
 	Sprite* sprite;
 
+	glm::vec3 defaultColor;
+	glm::vec3 highlightedColor;
+
 	bool mouseWasPressed = false;
 
 public:
