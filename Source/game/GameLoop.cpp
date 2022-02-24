@@ -101,8 +101,8 @@ namespace GameLoop
 			block.RenderText();
 
 		scoreDisplay->RenderText();
-		fpsDisplay->Render();
-
+		//fpsDisplay->Render();
+		restartButton->RenderText();
 
 		loseScreen->Render();
 

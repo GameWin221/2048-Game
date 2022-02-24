@@ -15,6 +15,7 @@ private:
 	Text* restartText;
 
 	Sprite* sprite;
+	Sprite* textBG;
 
 public:
 	LoseScreen();

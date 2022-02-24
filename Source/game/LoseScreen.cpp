@@ -1,27 +1,40 @@
 #include "game/LoseScreen.hpp"
 
-Texture* loseScreenTexture;
+Texture* loseScreenTexture = nullptr;
+Texture* spriteBGTexture   = nullptr;
 
 LoseScreen::LoseScreen()
 {
 	if (!loseScreenTexture)
 		loseScreenTexture = new Texture("Resources/Textures/LoseScreenBG.png");
 
+	if (!spriteBGTexture)
+		spriteBGTexture = new Texture("Resources/Textures/BGWide.png");
+
 	int wX, wY;
 	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wY);
 
 	this->isVisible = false;
 
-	this->sprite = new Sprite(loseScreenTexture, glm::vec2((float)wX / 2.0f), glm::vec2((float)wX/2.0f));
+	this->sprite = new Sprite(loseScreenTexture);
+	this->sprite->position = 
+	this->sprite->size = glm::vec2((float)wX / 2.0f);
+	this->sprite->color = glm::vec3(0.18f);
+
+	this->textBG = new Sprite(spriteBGTexture);
+	this->textBG->position = this->sprite->position+glm::vec2(0, 30);
+	this->textBG->size = glm::vec2((float)wX * 0.45f, (float)wX * 0.15f);
+	this->textBG->color = glm::vec3(0.4f);
 
 	this->loseText = new Text(Font::DefaultFont(), "You Lost");
 	this->loseText->centered = true;
 	this->loseText->position = this->sprite->position + glm::vec2(0, (float)wY * 0.065f);
 
-	this->restartText = new Text(Font::DefaultFont(), "Press the restart button!");
+	this->restartText = new Text(Font::DefaultFont(), "Press the \"New Game\" button!");
 	this->restartText->centered = true;
 	this->restartText->scale = 0.4f;
-	this->restartText->position = this->loseText->position - glm::vec2(0, (float)wY * 0.08f);
+	this->restartText->position = this->loseText->position - glm::vec2(0, (float)wY * 0.09f);
+	this->restartText->color = this->loseText->color = glm::vec3(0.2f);
 }
 
 void LoseScreen::SetVisibility(bool visibility)
@@ -35,6 +48,7 @@ void LoseScreen::Render()
 	{
 		Sprite::InitInstancing();
 		this->sprite->Render();
+		this->textBG->Render();
 
 		Text::InitInstancing();
 		this->loseText->Render();

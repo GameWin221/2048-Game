@@ -142,7 +142,7 @@ Grid::Grid(unsigned int size)
 
 	this->canSpawnBlock = false;
 
-	this->blockMoveSpeed = 2500.0f * (wX / 900.0f); // Scale the block movement speed relatively to the window size
+	this->blockMoveSpeed = 2600.0f * (wX / 900.0f); // Scale the block movement speed relatively to the window size
 }
 
 

@@ -18,9 +18,13 @@ protected:
 	Grid* grid;
 	ScoreDisplay* score;
 
+	Text* text;
+
 public:
 	RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay);
 	~RestartButton();
+
+	void RenderText();
 
 	void SetGlow(bool glow);
 

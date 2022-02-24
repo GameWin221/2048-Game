@@ -22,8 +22,6 @@ private:
 	int score;
 	int bestScore;
 
-	void RescaleBGs();
-
 public:
 	void AddScore(int deltaScore);
 	void SetScore(int targetScore);

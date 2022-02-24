@@ -1,8 +1,9 @@
 //TODO
-// Make the game look good (Change color pallette, motion blur?)
+// Postprocessing (Bloom, Motion blur)
 // Chosing the grid size (Kinda done)
 // Linux support
 // Smooth block movement (some function for interpolation)
+// (Glitch) blocks look like they wouldn't stop immidiately but they bounce
 
 #include "game/GameLoop.hpp"
 

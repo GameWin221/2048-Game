@@ -28,18 +28,19 @@ ScoreDisplay::ScoreDisplay(const int& gridSize)
 	file.close();
 
 	if (!bgTexture)
-		bgTexture = new Texture("Resources/Textures/TileRound.png");
+		bgTexture = new Texture("Resources/Textures/BGWide.png");
 
 	int wX, wY;
 	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wY);
 
 	// ### SCORE BG ###
 	glm::vec2 position(wX, wY);
-	position.x *= 0.2f;
+	position.x *= 0.17f;
 	position.y *= 0.938f;
 
 	this->scoreBG = new Sprite(bgTexture);
 	this->scoreBG->position = position;
+	this->scoreBG->size = glm::vec2((float)wX / 6.0f, 60);
 	this->scoreBG->color = glm::vec3(0.4);
 
 	// ### SCORE TEXT ###
@@ -59,31 +60,26 @@ ScoreDisplay::ScoreDisplay(const int& gridSize)
 
 	// ### BEST SCORE BG ###
 	this->bestScoreBG = new Sprite(bgTexture);
+	this->bestScoreBG->size = this->scoreBG->size;
+	this->bestScoreBG->position = glm::vec2((wX) * 0.5f, this->scoreBG->position.y);
 	this->bestScoreBG->color = this->scoreBG->color;
 
 	// ### BEST SCORE TEXT ###
 	this->bestScoreText = new Text(Font::DefaultFont(), "Best:");
+	this->bestScoreText->position = this->bestScoreBG->position + glm::vec2(0, 35);
 	this->bestScoreText->color = glm::vec3(0.2f);
 	this->bestScoreText->scale = 0.3f;
 	this->bestScoreText->centered = true;
 
 	// ### BEST SCORE VALUE ###
 	this->bestScoreValueText = new Text(Font::DefaultFont(), std::to_string(this->bestScore));
+	this->bestScoreValueText->position = this->bestScoreBG->position - glm::vec2(0, 20);
 	this->bestScoreValueText->color = glm::vec3(0.2);
 	this->bestScoreValueText->scale = 0.5f;
 	this->bestScoreValueText->centered = true;
 }
 ScoreDisplay::~ScoreDisplay(){}
 
-void ScoreDisplay::RescaleBGs()
-{
-	this->scoreBG->size		= glm::vec2(std::max(this->scoreValueText->GetBounds().x	 * 0.65f, this->scoreText->GetBounds().x	 * 0.65f), 60);
-	this->bestScoreBG->size = glm::vec2(std::max(this->bestScoreValueText->GetBounds().x * 0.65f, this->bestScoreText->GetBounds().x * 0.65f), 60);
-
-	this->bestScoreBG->position		   = this->scoreBG->position     + glm::vec2(this->scoreBG->size.x + this->bestScoreBG->size.x + 15, 0);
-	this->bestScoreText->position	   = this->bestScoreBG->position + glm::vec2(0, 35);
-	this->bestScoreValueText->position = this->bestScoreBG->position - glm::vec2(0, 20);
-}
 void ScoreDisplay::RenderBG()
 {
 	this->scoreBG->Render();
@@ -110,8 +106,6 @@ void ScoreDisplay::SetScore(int targetScore)
 
 	this->score = targetScore;
 	this->scoreValueText->SetString(std::to_string(this->score));
-
-	this->RescaleBGs();
 }
 const int& ScoreDisplay::GetScore() const
 {
@@ -122,8 +116,6 @@ void ScoreDisplay::SetBestScore(int targetBestScore)
 {
 	this->bestScore = targetBestScore;
 	this->bestScoreValueText->SetString(std::to_string(this->bestScore));
-
-	this->RescaleBGs();
 }
 const int& ScoreDisplay::GetBestScore() const
 {
