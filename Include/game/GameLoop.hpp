@@ -4,6 +4,7 @@
 #include "gfx/Shader.hpp"
 #include "gfx/Texture.hpp"
 #include "gfx/Sprite.hpp"
+#include "gfx/Framebuffer.hpp"
 
 #include "gfx/Text/Text.hpp"
 #include "gfx/Text/Font.hpp"

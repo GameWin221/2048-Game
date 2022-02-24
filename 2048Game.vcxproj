@@ -156,6 +156,7 @@
     <ClCompile Include="Source\game\Button\Button.cpp" />
     <ClCompile Include="Source\game\Button\RestartButton.cpp" />
     <ClCompile Include="Source\game\ScoreDisplay.cpp" />
+    <ClCompile Include="Source\gfx\Framebuffer.cpp" />
     <ClCompile Include="Source\gfx\Text\Font.cpp" />
     <ClCompile Include="External\STB\stb_image.cpp" />
     <ClCompile Include="Source\game\Block.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="Include\game\Button\RestartButton.hpp" />
     <ClInclude Include="Include\game\GameLoader.hpp" />
     <ClInclude Include="Include\game\ScoreDisplay.hpp" />
+    <ClInclude Include="Include\gfx\Framebuffer.hpp" />
     <ClInclude Include="Include\gfx\Text\Font.hpp" />
     <ClInclude Include="Include\game\Block.hpp" />
     <ClInclude Include="Include\game\Direction.hpp" />

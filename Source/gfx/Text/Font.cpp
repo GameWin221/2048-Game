@@ -99,6 +99,8 @@ Font::Font(std::string fontPath, int fontSize)
     
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 2);
 }
 Font::~Font()
 {

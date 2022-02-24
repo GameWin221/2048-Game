@@ -19,10 +19,14 @@ namespace GameLoop
 	RestartButton* restartButton;
 	LoseScreen* loseScreen;
 
+	Framebuffer* framebuffer;
+
 	void Start(const unsigned int& arg)
 	{
 		gameWindow = new Window(glm::uvec2(900, 1024), "2048");
 		glfwSetWindowCloseCallback(gameWindow->glfwWindow, Exit);
+
+		framebuffer = new Framebuffer(glm::uvec2(900, 1024), 4);
 
 		grid = new Grid(arg);
 
@@ -83,7 +87,8 @@ namespace GameLoop
 	}
 	void Render()
 	{
-		gameWindow->Clear(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
+		framebuffer->Use();
+		framebuffer->Clear(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 
 		Sprite::InitInstancing();
 
@@ -101,11 +106,12 @@ namespace GameLoop
 			block.RenderText();
 
 		scoreDisplay->RenderText();
-		//fpsDisplay->Render();
+		fpsDisplay->Render();
 		restartButton->RenderText();
 
 		loseScreen->Render();
 
+		framebuffer->Display();
 		gameWindow->Display();
 	}
 	void Exit(GLFWwindow* window)
