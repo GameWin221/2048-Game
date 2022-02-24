@@ -83,7 +83,7 @@ void Text::SetString(std::string newText)
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
-std::string Text::GetString()
+const std::string& Text::GetString() const
 {
     return this->text;
 }
@@ -110,6 +110,11 @@ void Text::InitInstancing()
     textShader->SetInt("text", 0);
 
     glActiveTexture(GL_TEXTURE0);
+}
+
+const glm::vec2& Text::GetBounds() const
+{
+    return this->textBounds * this->scale;
 }
 
 void Text::Render()

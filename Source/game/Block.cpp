@@ -2,46 +2,49 @@
 
 Texture* blockTexture = nullptr;
 
-const glm::vec3 ColorLUT(int& value)
+constexpr glm::vec3 ColorLUT(int& value) // Colors are still not final
 {
 	switch (value)
 	{
 	case 2:
-		return glm::vec3(0.5f, 0.9f, 0.1f);
+		return glm::vec3(27, 134, 242) / 255.0f;
 		break;
 	case 4:
-		return glm::vec3(0.5f, 0.1f, 0.9f);
+		return glm::vec3(255, 255, 20) / 255.0f;
 		break;
 	case 8:
-		return glm::vec3(0.0f, 1.0f, 0.7f);
+		return glm::vec3(101, 232, 0) / 255.0f;
 		break;
 	case 16:
-		return glm::vec3(1.0f, 1.0f, 0.0f);
+		return glm::vec3(174, 0, 232) / 255.0f;
 		break;
 	case 32:
-		return glm::vec3(1.0f, 0.7f, 0.0f);
+		return glm::vec3(247, 118, 5) / 255.0f;
 		break;
 	case 64:
-		return glm::vec3(1.0f, 0.1f, 0.1f);
+		return glm::vec3(247, 55, 30) / 255.0f;
 		break;
 	case 128:
-		return glm::vec3(0.1f, 1.0f, 0.0f);
+		return glm::vec3(250, 135, 35) / 255.0f;
 		break;
 	case 256:
-		return glm::vec3(1.0f, 0.0f, 0.0f);
+		return glm::vec3(247, 30, 182) / 255.0f;
 		break;
 	case 512:
-		return glm::vec3(0.5f, 0.8f, 0.8f);
+		return glm::vec3(222, 33, 140) / 255.0f;
 		break;
 	case 1024:
-		return glm::vec3(0.0f, 0.9f, 0.9f);
+		return glm::vec3(197, 33, 222) / 255.0f;
 		break;
 	case 2048:
-		return glm::vec3(0.0f, 1.0f, 1.0f);
+		return glm::vec3(162, 33, 222) / 255.0f;
+		break;
+	case 4096:
+		return glm::vec3(150, 25, 252) / 255.0f;
 		break;
 
 	default:
-		return glm::vec3(0.0f, 1.0f, 1.0f);
+		return glm::vec3(33, 55, 255)/255.0f;
 		break;
 	}
 }
@@ -49,7 +52,7 @@ const glm::vec3 ColorLUT(int& value)
 Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 {
 	if (!blockTexture)
-		blockTexture = new Texture("Resources/Textures/Tile.jpg");
+		blockTexture = new Texture("Resources/Textures/TileRound.png");
 
 	this->targetGridPos = pos;
 	this->value = val;
@@ -57,9 +60,10 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	this->deleteQueued = false;
 	this->promoteQueued = false;
 
-	this->sprite = new Sprite(blockTexture, glm::vec2(0), 0.95f * glm::vec2(gridOffset/2.0));
+	this->sprite = new Sprite(blockTexture);
 	this->sprite->color = ColorLUT(this->value);
 	this->sprite->position = glm::vec2(gridOffset * this->targetGridPos.x, gridOffset * this->targetGridPos.y) + glm::vec2(gridOffset / 2.0f);
+	this->sprite->size = glm::vec2(gridOffset / 2.0);
 
 	this->valueText = new Text(Font::DefaultFont(), std::to_string(this->value));
 	this->valueText->scale = this->sprite->size.x*0.008f;

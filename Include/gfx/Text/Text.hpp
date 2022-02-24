@@ -53,7 +53,7 @@ public:
 	static void InitInstancing();
 
 	void SetString(std::string newText);
-	std::string GetString();
+	const std::string& GetString() const;
 
 	void SetFont(Font* newFont);
 	Font* GetFont();
@@ -63,6 +63,8 @@ public:
 	glm::vec3 color;
 	glm::vec2 position;
 	float scale;
+	const glm::vec2& GetBounds() const;
+
 
 	void Render();
 };

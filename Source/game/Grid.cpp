@@ -125,7 +125,7 @@ bool Grid::CheckLose()
 
 Grid::Grid(unsigned int size)
 {
-	gridTexture = new Texture("Resources/Textures/Grid.png");
+	gridTexture = new Texture("Resources/Textures/TileRound.png");
 
 	int wX, wH;
 	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wH);
@@ -135,14 +135,14 @@ Grid::Grid(unsigned int size)
 
 	this->sprite = new Sprite(gridTexture, glm::vec2(0), glm::vec2(wX));
 	this->sprite->texture->tiling = glm::vec2(gridSize*2);
-	this->sprite->color = glm::vec3(0.0f, 0.0f, 0.0f);
+	this->sprite->color = glm::vec3(0.4f);
 
 	this->shouldLose = false;
 	this->lost = false;
 
 	this->canSpawnBlock = false;
 
-	this->blockMoveSpeed = 2500.0f * (wX / 1024.0f); // Scale the block movement speed relatively to the window size (the game was developed on a 1024x1224 window)
+	this->blockMoveSpeed = 2500.0f * (wX / 900.0f); // Scale the block movement speed relatively to the window size
 }
 
 

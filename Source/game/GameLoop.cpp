@@ -83,7 +83,7 @@ namespace GameLoop
 	}
 	void Render()
 	{
-		gameWindow->Clear(glm::vec4(1.0f, 1.0f, 1.0f, 1.0f));
+		gameWindow->Clear(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 
 		Sprite::InitInstancing();
 
@@ -93,13 +93,14 @@ namespace GameLoop
 			block.RenderSprite();
 
 		restartButton->Render();
+		scoreDisplay->RenderBG();
 
 		Text::InitInstancing();
 
 		for (auto& block : grid->blocks)
 			block.RenderText();
 
-		scoreDisplay->Render();
+		scoreDisplay->RenderText();
 		fpsDisplay->Render();
 
 

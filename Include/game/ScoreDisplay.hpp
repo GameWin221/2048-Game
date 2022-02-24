@@ -4,6 +4,7 @@
 #define SCOREDISPLAY_HPP
 
 #include "gfx/Text/Text.hpp"
+#include "gfx/Sprite.hpp"
 #include <fstream>
 
 class ScoreDisplay
@@ -12,8 +13,16 @@ private:
 	Text* scoreText;
 	Text* bestScoreText;
 
+	Text* scoreValueText;
+	Text* bestScoreValueText;
+
+	Sprite* scoreBG;
+	Sprite* bestScoreBG;
+
 	int score;
 	int bestScore;
+
+	void RescaleBGs();
 
 public:
 	void AddScore(int deltaScore);
@@ -25,7 +34,8 @@ public:
 
 	void SaveBestScore(const int& gridSize);
 
-	void Render();
+	void RenderBG();
+	void RenderText();
 
 	ScoreDisplay(const int& gridSize);
 	~ScoreDisplay();

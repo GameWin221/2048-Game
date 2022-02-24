@@ -62,7 +62,6 @@ void Window::Display()
 void Window::Close()
 {
 	glfwSetWindowShouldClose(glfwWindow, true);
-	exit(EXIT_SUCCESS);
 }
 
 // Callbacks

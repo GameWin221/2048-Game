@@ -1,12 +1,15 @@
 //TODO
 // Make the game look good (Change color pallette, motion blur?)
 // Chosing the grid size (Kinda done)
-// (Glitch) Loading the game after lose causes it to freeze
+// Linux support
+// Smooth block movement (some function for interpolation)
 
 #include "game/GameLoop.hpp"
 
+#ifdef _WIN32
 #define NOMINMAX
 #include <windows.h>
+#endif
 
 using namespace GameLoop;
 
@@ -18,7 +21,10 @@ int main()
 	std::cin >> size;
 	size = std::min(std::max(size, 2), 32);
 
+#ifdef _WIN32
 	ShowWindow(GetConsoleWindow(), SW_HIDE);
+#endif
+
 	Start(size);
 	
 	while (IsRunning())
@@ -26,4 +32,8 @@ int main()
 		Update();
 		Render();
 	}
+
+#ifdef _WIN32
+	ShowWindow(GetConsoleWindow(), SW_SHOW);
+#endif
 }

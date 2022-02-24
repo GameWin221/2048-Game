@@ -1,5 +1,7 @@
 #include "game/ScoreDisplay.hpp"
 
+Texture* bgTexture;
+
 ScoreDisplay::ScoreDisplay(const int& gridSize)
 {
 	this->score = 0;
@@ -25,34 +27,75 @@ ScoreDisplay::ScoreDisplay(const int& gridSize)
 
 	file.close();
 
+	if (!bgTexture)
+		bgTexture = new Texture("Resources/Textures/TileRound.png");
+
 	int wX, wY;
 	glfwGetFramebufferSize(glfwGetCurrentContext(), &wX, &wY);
 
+	// ### SCORE BG ###
 	glm::vec2 position(wX, wY);
-	position.x *= 0.02f;
-	position.y *= 0.9f;
+	position.x *= 0.2f;
+	position.y *= 0.938f;
 
-	this->scoreText = new Text(Font::DefaultFont(), "Score: 0");
-	this->scoreText->position = position;
-	this->scoreText->color = glm::vec3(0.0f, 0.0, 0.0f);
-	this->scoreText->scale = 0.4f;
+	this->scoreBG = new Sprite(bgTexture);
+	this->scoreBG->position = position;
+	this->scoreBG->color = glm::vec3(0.4);
 
-	position = glm::vec2(wX, wY);
-	position.x *= 0.02f;
-	position.y *= 0.96f;
+	// ### SCORE TEXT ###
+	this->scoreText = new Text(Font::DefaultFont(), "Score:");
+	this->scoreText->position = this->scoreBG->position + glm::vec2(0, 35);
+	this->scoreText->color = glm::vec3(0.2f);
+	this->scoreText->scale = 0.3f;
+	this->scoreText->centered = true;
 
-	this->bestScoreText = new Text(Font::DefaultFont(), "Best Score: " + std::to_string(this->bestScore));
-	this->bestScoreText->position = position;
-	this->bestScoreText->color = glm::vec3(0.0f, 0.0, 0.0f);
-	this->bestScoreText->scale = 0.4f;
+	// ### SCORE VALUE ###
+	this->scoreValueText = new Text(Font::DefaultFont(), std::to_string(this->score));
+	this->scoreValueText->position = this->scoreBG->position - glm::vec2(0, 20);
+	this->scoreValueText->color = glm::vec3(0.2f);
+	this->scoreValueText->scale = 0.5f;
+	this->scoreValueText->centered = true;
+
+
+	// ### BEST SCORE BG ###
+	this->bestScoreBG = new Sprite(bgTexture);
+	this->bestScoreBG->color = this->scoreBG->color;
+
+	// ### BEST SCORE TEXT ###
+	this->bestScoreText = new Text(Font::DefaultFont(), "Best:");
+	this->bestScoreText->color = glm::vec3(0.2f);
+	this->bestScoreText->scale = 0.3f;
+	this->bestScoreText->centered = true;
+
+	// ### BEST SCORE VALUE ###
+	this->bestScoreValueText = new Text(Font::DefaultFont(), std::to_string(this->bestScore));
+	this->bestScoreValueText->color = glm::vec3(0.2);
+	this->bestScoreValueText->scale = 0.5f;
+	this->bestScoreValueText->centered = true;
 }
-
 ScoreDisplay::~ScoreDisplay(){}
 
-void ScoreDisplay::Render()
+void ScoreDisplay::RescaleBGs()
+{
+	this->scoreBG->size		= glm::vec2(std::max(this->scoreValueText->GetBounds().x	 * 0.65f, this->scoreText->GetBounds().x	 * 0.65f), 60);
+	this->bestScoreBG->size = glm::vec2(std::max(this->bestScoreValueText->GetBounds().x * 0.65f, this->bestScoreText->GetBounds().x * 0.65f), 60);
+
+	this->bestScoreBG->position		   = this->scoreBG->position     + glm::vec2(this->scoreBG->size.x + this->bestScoreBG->size.x + 15, 0);
+	this->bestScoreText->position	   = this->bestScoreBG->position + glm::vec2(0, 35);
+	this->bestScoreValueText->position = this->bestScoreBG->position - glm::vec2(0, 20);
+}
+void ScoreDisplay::RenderBG()
+{
+	this->scoreBG->Render();
+	this->bestScoreBG->Render();
+}
+void ScoreDisplay::RenderText()
 {
 	this->scoreText->Render();
 	this->bestScoreText->Render();
+
+	this->scoreValueText->Render();
+	this->bestScoreValueText->Render();
 }
 
 void ScoreDisplay::AddScore(int deltaScore)
@@ -66,7 +109,9 @@ void ScoreDisplay::SetScore(int targetScore)
 		this->SetBestScore(targetScore);
 
 	this->score = targetScore;
-	this->scoreText->SetString("Score: " + std::to_string(this->score));
+	this->scoreValueText->SetString(std::to_string(this->score));
+
+	this->RescaleBGs();
 }
 const int& ScoreDisplay::GetScore() const
 {
@@ -76,7 +121,9 @@ const int& ScoreDisplay::GetScore() const
 void ScoreDisplay::SetBestScore(int targetBestScore)
 {
 	this->bestScore = targetBestScore;
-	this->bestScoreText->SetString("Best Score: " + std::to_string(this->bestScore));
+	this->bestScoreValueText->SetString(std::to_string(this->bestScore));
+
+	this->RescaleBGs();
 }
 const int& ScoreDisplay::GetBestScore() const
 {
