@@ -4,6 +4,6 @@
 # Planned features (Will be added soon):
 -Menu for selecting the grid size
 
--Prettier textures and color pallette
+-Bloom, possibly motion blur
 
 -Compatibility for Linux (Make)
