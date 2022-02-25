@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="MenuLoop.cpp" />
     <ClCompile Include="Source\game\GameLoader.cpp" />
     <ClCompile Include="Source\game\LoseScreen.cpp" />
     <ClCompile Include="Source\game\Button\Button.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="Include\gfx\Texture.hpp" />
     <ClInclude Include="Include\gfx\Window.hpp" />
     <ClInclude Include="Include\game\LoseScreen.hpp" />
+    <ClInclude Include="MenuLoop.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

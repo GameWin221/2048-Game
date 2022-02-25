@@ -26,7 +26,9 @@ public:
 	bool promoteQueued;
 	bool deleteQueued;
 	
-	Sprite* sprite;
+	Sprite* blur = nullptr;
+	Sprite* sprite = nullptr;
+
 	Text* valueText;
 	Target target;
 
@@ -45,6 +47,7 @@ public:
 		this->promoteQueued = other.promoteQueued;
 		this->deleteQueued = other.deleteQueued;
 		this->sprite = other.sprite;
+		this->blur = other.blur;
 		this->target = other.target;
 		this->mergeToID = other.mergeToID;
 		this->targetGridPos = other.targetGridPos;
@@ -57,6 +60,7 @@ public:
 		this->promoteQueued = other.promoteQueued;
 		this->deleteQueued = other.deleteQueued;
 		this->sprite = other.sprite;
+		this->blur = other.blur;
 		this->target = other.target;
 		this->mergeToID = other.mergeToID;
 		this->targetGridPos = other.targetGridPos;

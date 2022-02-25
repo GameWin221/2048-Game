@@ -40,6 +40,7 @@ Sprite::Sprite(Texture* tex, glm::vec2 pos, glm::vec2 siz, glm::vec3 col)
     this->position = pos;
     this->color    = col;
     this->size     = siz;
+    this->opacity  = 1.0f;
 }
 Sprite::~Sprite(){}
 
@@ -66,6 +67,7 @@ void Sprite::Render()
     model = glm::scale(    model, glm::vec3(this->size.x    , this->size.y    , 1.0f));
 
     shader->SetVec3("color", color);
+    shader->SetFloat("opacity", this->opacity);
     shader->SetMat4("model", model);
     shader->SetVec2("textureTiling", this->texture->tiling);
 

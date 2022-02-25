@@ -1,6 +1,5 @@
 //TODO
-// Postprocessing (Bloom, Motion blur)
-// Change the default color of the New Game button
+// (Glitch) theres a "flash" when the LoseSceen shows up
 // Chosing the grid size (Kinda done, but I'd like a menu)
 // Linux support
 

@@ -1,6 +1,7 @@
 #include "game/Block.hpp"
 
 Texture* blockTexture = nullptr;
+Texture* blurTexture = nullptr;
 
 constexpr glm::vec3 ColorLUT(int& value) // Colors are still not final
 {
@@ -54,19 +55,28 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 	if (!blockTexture)
 		blockTexture = new Texture("Resources/Textures/TileRound.png");
 
+	if (!blurTexture)
+		blurTexture = new Texture("Resources/Textures/BlockBlur.png");
+
 	this->targetGridPos = pos;
 	this->value = val;
 
-	this->deleteQueued = false;
+	this->deleteQueued  = false;
 	this->promoteQueued = false;
 
-	this->sprite = new Sprite(blockTexture);
-	this->sprite->color = ColorLUT(this->value);
+	this->sprite		   = new Sprite(blockTexture);
+	this->sprite->color	   = ColorLUT(this->value);
 	this->sprite->position = glm::vec2(gridOffset * this->targetGridPos.x, gridOffset * this->targetGridPos.y) + glm::vec2(gridOffset / 2.0f);
-	this->sprite->size = glm::vec2(gridOffset / 2.0);
+	this->sprite->size	   = glm::vec2(gridOffset / 2.0f);
 
-	this->valueText = new Text(Font::DefaultFont(), std::to_string(this->value));
-	this->valueText->scale = this->sprite->size.x*0.008f;
+	this->blur			 = new Sprite(blurTexture);
+	this->blur->color	 = this->sprite->color;
+	this->blur->position = this->sprite->position;
+	this->blur->size	 = this->sprite->size * 1.02f;
+	this->blur->opacity  = 0.4f;
+
+	this->valueText			  = new Text(Font::DefaultFont(), std::to_string(this->value));
+	this->valueText->scale    = this->sprite->size.x*0.008f;
 	this->valueText->centered = true;
 
 	this->target.targetPos         = this->sprite->position;
@@ -79,6 +89,10 @@ Block::Block(glm::ivec2 pos, const float& gridOffset, int val)
 
 void Block::RenderSprite()
 {
+	this->blur->color = this->sprite->color;
+	this->blur->position = this->sprite->position;
+	this->blur->Render();
+
 	this->sprite->Render();
 }
 void Block::RenderText()

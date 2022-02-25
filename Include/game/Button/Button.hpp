@@ -21,9 +21,9 @@ public:
 	Button(Sprite* buttonSprite);
 
 	virtual void OnPress();
+	virtual void Render();
 
 	void CheckPress();
-	void Render();
 };
 
 #endif

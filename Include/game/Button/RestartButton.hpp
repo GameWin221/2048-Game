@@ -13,6 +13,8 @@ class RestartButton : public Button
 private:
 	glm::vec3 glowColor;
 
+	Sprite* blur;
+
 protected:
 	Grid* grid;
 	ScoreDisplay* score;
@@ -23,6 +25,7 @@ public:
 	RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay);
 	~RestartButton();
 
+	void Render();
 	void RenderText();
 
 	void SetGlow(bool glow);

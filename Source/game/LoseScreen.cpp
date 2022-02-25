@@ -6,7 +6,7 @@ Texture* spriteBGTexture   = nullptr;
 LoseScreen::LoseScreen()
 {
 	if (!loseScreenTexture)
-		loseScreenTexture = new Texture("Resources/Textures/LoseScreenBG.png");
+		loseScreenTexture = new Texture("Resources/Textures/White.jpg");
 
 	if (!spriteBGTexture)
 		spriteBGTexture = new Texture("Resources/Textures/BGWide.png");
@@ -20,6 +20,7 @@ LoseScreen::LoseScreen()
 	this->sprite->position = 
 	this->sprite->size = glm::vec2((float)wX / 2.0f);
 	this->sprite->color = glm::vec3(0.18f);
+	this->sprite->opacity = 0.8f;
 
 	this->textBG = new Sprite(spriteBGTexture);
 	this->textBG->position = this->sprite->position+glm::vec2(0, 30);

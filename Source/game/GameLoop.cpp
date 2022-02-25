@@ -19,14 +19,17 @@ namespace GameLoop
 	RestartButton* restartButton;
 	LoseScreen* loseScreen;
 
-	Framebuffer* framebuffer;
+	Texture* vignetteTexture;
+	Sprite* vignette;
+
+	//Framebuffer* framebuffer;
 
 	void Start(const unsigned int& arg)
 	{
 		gameWindow = new Window(glm::uvec2(900, 1024), "2048");
 		glfwSetWindowCloseCallback(gameWindow->glfwWindow, Exit);
-
-		framebuffer = new Framebuffer(glm::uvec2(900, 1024), 4);
+		
+		//framebuffer = new Framebuffer(glm::uvec2(900, 1024), 4);
 
 		grid = new Grid(arg);
 
@@ -34,6 +37,13 @@ namespace GameLoop
 		fpsDisplay	  = new FPSDisplay;
 		loseScreen	  = new LoseScreen;
 		restartButton = new RestartButton(grid, scoreDisplay);
+
+		vignetteTexture = new Texture("Resources/Textures/Vignette.png");
+
+		vignette = new Sprite(vignetteTexture);
+		vignette->position = glm::vec2(450, 512);
+		vignette->size = vignette->position;
+		vignette->opacity = 0.5f;
 
 		//FillGrid(grid, arg);
 
@@ -87,8 +97,7 @@ namespace GameLoop
 	}
 	void Render()
 	{
-		framebuffer->Use();
-		framebuffer->Clear(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
+		gameWindow->Clear(glm::vec4(0.2f, 0.2f, 0.2f, 1.0f));
 
 		Sprite::InitInstancing();
 
@@ -97,8 +106,8 @@ namespace GameLoop
 		for (auto& block : grid->blocks)
 			block.RenderSprite();
 
-		restartButton->Render();
 		scoreDisplay->RenderBG();
+		restartButton->Render();
 
 		Text::InitInstancing();
 
@@ -111,7 +120,9 @@ namespace GameLoop
 
 		loseScreen->Render();
 
-		framebuffer->Display();
+		Sprite::InitInstancing();
+		vignette->Render();
+
 		gameWindow->Display();
 	}
 	void Exit(GLFWwindow* window)
