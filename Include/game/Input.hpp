@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef INPUT_HPP
+#define INPUT_HPP
+
 #include "game/Direction.hpp"
 #include "glfw3.h"
 
@@ -9,3 +12,5 @@ namespace Input
 
 	extern void UpdateOldInputs();
 };
+
+#endif

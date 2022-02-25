@@ -4,35 +4,35 @@
 // Linux support
 
 #include "game/GameLoop.hpp"
+#include "menu/MenuLoop.hpp"
 
 #ifdef _WIN32
 #define NOMINMAX
 #include <windows.h>
 #endif
 
-using namespace GameLoop;
-
-int main()
-{
-	std::cout << "Type in the grid's size (min: 2, max: 32): ";
-	
-	int size;
-	std::cin >> size;
-	size = std::min(std::max(size, 2), 32);
-
 #ifdef _WIN32
-	ShowWindow(GetConsoleWindow(), SW_HIDE);
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
+#else
+int main()
 #endif
-
-	Start(size);
+{
+	int size;
+	MenuLoop::Start(&size);
 	
-	while (IsRunning())
+	while (MenuLoop::IsRunning())
 	{
-		Update();
-		Render();
+		MenuLoop::Update();
+		MenuLoop::Render();
 	}
 
-#ifdef _WIN32
-	ShowWindow(GetConsoleWindow(), SW_SHOW);
-#endif
+//####################################
+
+	GameLoop::Start(size);
+	
+	while (GameLoop::IsRunning())
+	{
+		GameLoop::Update();
+		GameLoop::Render();
+	}
 }

@@ -142,7 +142,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)External\CL;$(SolutionDir)External\GLEW\include;$(SolutionDir)External\GLFW\include;$(SolutionDir)External\GLM\include;$(SolutionDir)External\STB;$(SolutionDir)External\FreeType\include;$(SolutionDir)Include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -151,7 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="MenuLoop.cpp" />
+    <ClCompile Include="Source\menu\GridSizeButton.cpp" />
+    <ClCompile Include="Source\menu\MenuLoop.cpp" />
     <ClCompile Include="Source\game\GameLoader.cpp" />
     <ClCompile Include="Source\game\LoseScreen.cpp" />
     <ClCompile Include="Source\game\Button\Button.cpp" />
@@ -179,6 +180,7 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\menu\GridSizeButton.hpp" />
     <ClInclude Include="Include\game\Button\Button.hpp" />
     <ClInclude Include="Include\game\Button\RestartButton.hpp" />
     <ClInclude Include="Include\game\GameLoader.hpp" />
@@ -197,7 +199,7 @@
     <ClInclude Include="Include\gfx\Texture.hpp" />
     <ClInclude Include="Include\gfx\Window.hpp" />
     <ClInclude Include="Include\game\LoseScreen.hpp" />
-    <ClInclude Include="MenuLoop.hpp" />
+    <ClInclude Include="Include\menu\MenuLoop.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

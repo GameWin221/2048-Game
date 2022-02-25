@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef GAMELOOP_HPP
+#define GAMELOOP_HPP
+
 #include "gfx/Window.hpp"
 #include "gfx/Shader.hpp"
 #include "gfx/Texture.hpp"
@@ -33,3 +36,5 @@ namespace GameLoop
 	void Exit(GLFWwindow* window);
 	void Lose();
 };
+
+#endif

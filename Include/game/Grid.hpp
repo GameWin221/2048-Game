@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef GRID_HPP
+#define GRID_HPP
+
 #include "game/Block.hpp"
 #include "game/Direction.hpp"
 #include "game/ScoreDisplay.hpp"
@@ -45,3 +48,5 @@ public:
 
 	void MoveBlocks(const Direction dir);
 };
+
+#endif
