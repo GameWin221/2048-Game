@@ -31,5 +31,5 @@ void GridSizeButton::RenderText()
 
 void GridSizeButton::OnPress()
 {
-	
+	Menu::SetChosenSize(this->gridSize);
 }

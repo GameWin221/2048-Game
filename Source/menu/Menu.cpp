@@ -1,6 +1,6 @@
-#include "menu/MenuLoop.hpp"
+#include "menu/Menu.hpp"
 
-namespace MenuLoop
+namespace Menu
 {
 	Window* menuWindow;
 
@@ -12,7 +12,7 @@ namespace MenuLoop
 
 	Texture* topPanelTexture;
 	Sprite* topPanel;
-
+	
 	GridSizeButton* button2 ;
 	GridSizeButton* button4 ;
 	GridSizeButton* button6 ;
@@ -24,12 +24,14 @@ namespace MenuLoop
 	GridSizeButton* button32;
 
 	int* sizeIntPtr;
-
-	void Start(int* sizeInt)
+	int chosenSize = 0;
+	
+	void Start(int* sizeInt, Window* window)
 	{
 		sizeIntPtr = sizeInt;
+		menuWindow = window;
 
-		menuWindow = new Window(glm::uvec2(900, 1024), "2048");
+		//menuWindow = new Window(glm::uvec2(900, 1024), "2048");
 		glfwSetWindowCloseCallback(menuWindow->glfwWindow, Exit);
 
 		vignetteTexture = new Texture("Resources/Textures/Vignette.png");
@@ -123,8 +125,6 @@ namespace MenuLoop
 
 	void CloseMenu()
 	{
-		menuWindow->Close();
-
 		delete vignetteTexture;
 		delete vignette;
 		delete titleText;
@@ -140,30 +140,22 @@ namespace MenuLoop
 		delete button20;
 		delete button24;
 		delete button32;
-		delete menuWindow;
+	}
+
+	const int& GetChosenSize()
+	{
+		return chosenSize;
+	}
+
+	void SetChosenSize(const int size)
+	{
+		chosenSize = size;
+		*sizeIntPtr = chosenSize;
 	}
 
 	void Exit(GLFWwindow* window)
 	{
 		menuWindow->Close();
-
-		delete vignetteTexture;
-		delete vignette;
-		delete titleText;
-		delete chooseText;
-		delete topPanelTexture;
-		delete topPanel;
-		delete button2;
-		delete button4;
-		delete button6;
-		delete button8;
-		delete button12;
-		delete button16;
-		delete button20;
-		delete button24;
-		delete button32;
-		delete menuWindow;
-
 		exit(0);
 	}
 	bool IsRunning()

@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef MENULOOP_HPP
-#define MENULOOP_HPP
+#ifndef MENU_HPP
+#define MENU_HPP
 
 #include "gfx/Window.hpp"
 #include "gfx/Shader.hpp"
@@ -14,15 +14,18 @@
 #include "game/Button/Button.hpp"
 #include "menu/GridSizeButton.hpp"
 
-namespace MenuLoop
+namespace Menu
 {
 	bool IsRunning();
 
-	void Start(int* sizeInt);
+	void Start(int* sizeInt, Window* window);
 	void Update();
 	void Render();
 
 	void CloseMenu();
+
+	const int& GetChosenSize();
+	void SetChosenSize(const int size);
 
 	void Exit(GLFWwindow* window);
 };

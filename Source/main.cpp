@@ -1,10 +1,9 @@
-//TODO
-// (Glitch) theres a "flash" when the LoseSceen shows up
-// Chosing the grid size (Kinda done, but I'd like a menu)
-// Linux support
+// TODO
+// Linux support (Makefile)
+// Improve the menu
 
 #include "game/GameLoop.hpp"
-#include "menu/MenuLoop.hpp"
+#include "menu/Menu.hpp"
 
 #ifdef _WIN32
 #define NOMINMAX
@@ -17,19 +16,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 int main()
 #endif
 {
-	int size;
-	MenuLoop::Start(&size);
+	Window* mainWindow = new Window(glm::uvec2(900, 1024), "2048");
+
+	int size = 0;
+
+// MENU
+
+	Menu::Start(&size, mainWindow);
 	
-	while (MenuLoop::IsRunning())
+	while (Menu::IsRunning() && Menu::GetChosenSize() == 0)
 	{
-		MenuLoop::Update();
-		MenuLoop::Render();
+		Menu::Update();
+		Menu::Render();
 	}
 
-//####################################
+	Menu::CloseMenu();
 
-	GameLoop::Start(size);
+// GAME
 	
+	GameLoop::Start(size, mainWindow);
+
 	while (GameLoop::IsRunning())
 	{
 		GameLoop::Update();

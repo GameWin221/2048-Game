@@ -10,6 +10,7 @@ Window::Window(glm::uvec2 size, std::string name)
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
 	glfwWindow = glfwCreateWindow(size.x, size.y, name.c_str(), NULL, NULL);
+
 	if (glfwWindow == NULL)
 	{
 		std::cout << "Failed to create GLFW window!" << std::endl;

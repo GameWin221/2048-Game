@@ -24,9 +24,10 @@ namespace GameLoop
 
 	//Framebuffer* framebuffer;
 
-	void Start(const unsigned int& arg)
+	void Start(const unsigned int& arg, Window* window)
 	{
-		gameWindow = new Window(glm::uvec2(900, 1024), "2048");
+		//gameWindow = new Window(glm::uvec2(900, 1024), "2048");
+		gameWindow = window;
 		glfwSetWindowCloseCallback(gameWindow->glfwWindow, Exit);
 		
 		//framebuffer = new Framebuffer(glm::uvec2(900, 1024), 4);
@@ -66,6 +67,8 @@ namespace GameLoop
 		// If the player didn't lose yet
 		if (!grid->lost)
 		{
+			loseScreen->SetVisibility(false);
+
 			// If pressed W/Up Arrow
 			if (Input::Clicked(Up))
 				grid->MoveBlocks(Up);
@@ -86,10 +89,10 @@ namespace GameLoop
 				Lose();
 
 			grid->Update(fpsDisplay->deltaTime, scoreDisplay);
-
-			loseScreen->SetVisibility(false);
 		}
-		else
+
+		// Check if the player lost after the Grid::Update()
+		if (grid->lost)
 			loseScreen->SetVisibility(true);
 
 		// Check key states to use in the next frame
@@ -115,7 +118,7 @@ namespace GameLoop
 			block.RenderText();
 
 		scoreDisplay->RenderText();
-		fpsDisplay->Render();
+		//fpsDisplay->Render();
 		restartButton->RenderText();
 
 		loseScreen->Render();

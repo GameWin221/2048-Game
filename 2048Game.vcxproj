@@ -152,7 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\menu\GridSizeButton.cpp" />
-    <ClCompile Include="Source\menu\MenuLoop.cpp" />
+    <ClCompile Include="Source\menu\Menu.cpp" />
     <ClCompile Include="Source\game\GameLoader.cpp" />
     <ClCompile Include="Source\game\LoseScreen.cpp" />
     <ClCompile Include="Source\game\Button\Button.cpp" />
@@ -199,7 +199,7 @@
     <ClInclude Include="Include\gfx\Texture.hpp" />
     <ClInclude Include="Include\gfx\Window.hpp" />
     <ClInclude Include="Include\game\LoseScreen.hpp" />
-    <ClInclude Include="Include\menu\MenuLoop.hpp" />
+    <ClInclude Include="Include\menu\Menu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

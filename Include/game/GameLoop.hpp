@@ -30,7 +30,7 @@ namespace GameLoop
 {
 	bool IsRunning();
 
-	void Start(const unsigned int& arg);
+	void Start(const unsigned int& arg, Window* window);
 	void Update();
 	void Render();
 	void Exit(GLFWwindow* window);

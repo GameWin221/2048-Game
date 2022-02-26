@@ -5,6 +5,7 @@
 
 #include "game/Button/Button.hpp"
 #include "gfx/Text/Text.hpp"
+#include "menu/Menu.hpp"
 
 #include <glm.hpp>
 
