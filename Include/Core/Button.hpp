@@ -3,7 +3,7 @@
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
 
-#include "gfx/Sprite.hpp"
+#include "Core/Gfx/Sprite.hpp"
 
 class Button
 {

@@ -1,4 +1,4 @@
-#include "menu/GridSizeButton.hpp"
+#include "Menu/GridSizeButton.hpp"
 
 Texture* gridButtonTexture;
 

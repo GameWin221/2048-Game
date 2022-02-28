@@ -10,8 +10,8 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-#include "gfx/Shader.hpp"
-#include "gfx/Texture.hpp"
+#include "Core/Gfx/Shader.hpp"
+#include "Core/Gfx/Texture.hpp"
 
 class Sprite
 {

@@ -3,10 +3,10 @@
 #ifndef RESTARTBUTTON_HPP
 #define RESTARTBUTTON_HPP
 
-#include "game/Button/Button.hpp"
+#include "Core/Button.hpp"
 
-#include "game/Grid.hpp"
-#include "game/ScoreDisplay.hpp"
+#include "Game/Grid.hpp"
+#include "Game/ScoreDisplay.hpp"
 
 class RestartButton : public Button
 {

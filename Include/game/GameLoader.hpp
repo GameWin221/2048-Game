@@ -1,8 +1,8 @@
 #ifndef GAMELOADER_HPP
 #define GAMELOADER_HPP
 
-#include "game/Grid.hpp"
-#include "game/ScoreDisplay.hpp"
+#include "Game/Grid.hpp"
+#include "Game/ScoreDisplay.hpp"
 
 #include <fstream>
 #include <string>

@@ -1,4 +1,4 @@
-#include "gfx/Text/Text.hpp"
+#include "Core/Text/Text.hpp"
 
 Shader* textShader = nullptr;
 

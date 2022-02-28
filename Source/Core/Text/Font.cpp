@@ -1,4 +1,4 @@
-#include "gfx/Text/Font.hpp"
+#include "Core/Text/Font.hpp"
 
 Font* defaultFont = nullptr;
 

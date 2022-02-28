@@ -1,4 +1,4 @@
-#include "game/GameLoop.hpp"
+#include "Game/GameLoop.hpp"
 
 // Only for debugging/testing purposes
 const void FillGrid(Grid* grid, const int& size)

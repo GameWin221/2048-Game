@@ -3,7 +3,7 @@
 #ifndef INPUT_HPP
 #define INPUT_HPP
 
-#include "game/Direction.hpp"
+#include "Core/Direction.hpp"
 #include "glfw3.h"
 
 namespace Input

@@ -3,8 +3,8 @@
 #ifndef BLOCK_HPP
 #define BLOCK_HPP
 
-#include "gfx/Sprite.hpp"
-#include "gfx/Text/Text.hpp"
+#include "Core/Gfx/Sprite.hpp"
+#include "Core/Text/Text.hpp"
 
 struct Target
 {

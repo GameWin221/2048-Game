@@ -1,4 +1,4 @@
-#include "game/Grid.hpp"
+#include "Game/Grid.hpp"
 
 Texture* gridTexture = nullptr;
 

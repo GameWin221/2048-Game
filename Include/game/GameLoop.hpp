@@ -3,28 +3,28 @@
 #ifndef GAMELOOP_HPP
 #define GAMELOOP_HPP
 
-#include "gfx/Window.hpp"
-#include "gfx/Shader.hpp"
-#include "gfx/Texture.hpp"
-#include "gfx/Sprite.hpp"
-#include "gfx/Framebuffer.hpp"
+#include "Core/Gfx/Window.hpp"
+#include "Core/Gfx/Shader.hpp"
+#include "Core/Gfx/Texture.hpp"
+#include "Core/Gfx/Sprite.hpp"
+#include "Core/Gfx/Framebuffer.hpp"
 
-#include "gfx/Text/Text.hpp"
-#include "gfx/Text/Font.hpp"
+#include "Core/Text/Text.hpp"
+#include "Core/Text/Font.hpp"
 
-#include "game/Direction.hpp"
-#include "game/Input.hpp"
-#include "game/Block.hpp"
-#include "game/Grid.hpp"
+#include "Core/Direction.hpp"
+#include "Core/Input.hpp"
 
-#include "game/FPSDisplay.hpp"
-#include "game/ScoreDisplay.hpp"
-#include "game/LoseScreen.hpp"
+#include "Game/Block.hpp"
+#include "Game/Grid.hpp"
+#include "Game/FPSDisplay.hpp"
+#include "Game/ScoreDisplay.hpp"
+#include "Game/LoseScreen.hpp"
 
-#include "game/Button/Button.hpp"
-#include "game/Button/RestartButton.hpp"
+#include "Core/Button.hpp"
+#include "Game/RestartButton.hpp"
 
-#include "game/GameLoader.hpp"
+#include "Game/GameLoader.hpp"
 
 namespace GameLoop
 {

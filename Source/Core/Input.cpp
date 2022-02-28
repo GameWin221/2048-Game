@@ -1,4 +1,4 @@
-#include "game/Input.hpp"
+#include "Core/Input.hpp"
 
 bool upWasPressed    = false;
 bool downWasPressed  = false;

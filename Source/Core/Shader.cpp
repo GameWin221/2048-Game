@@ -1,4 +1,4 @@
-#include "gfx/Shader.hpp"
+#include "Core/Gfx/Shader.hpp"
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {

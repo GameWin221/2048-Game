@@ -1,8 +1,8 @@
-#include "game/GameLoader.hpp"
+#include "Game/GameLoader.hpp"
 
 namespace GameLoader
 {
-	const std::string saveName = "game";
+	const std::string saveName = "Game";
 	const std::string saveExtension = ".save";
 	const std::string saveFolder = "Saves/";
 

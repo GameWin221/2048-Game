@@ -3,9 +3,9 @@
 #ifndef GRIDSIZEBUTTON_HPP
 #define GRIDSIZEBUTTON_HPP
 
-#include "game/Button/Button.hpp"
-#include "gfx/Text/Text.hpp"
-#include "menu/Menu.hpp"
+#include "Core/Button.hpp"
+#include "Core/Text/Text.hpp"
+#include "Menu/Menu.hpp"
 
 #include <glm.hpp>
 

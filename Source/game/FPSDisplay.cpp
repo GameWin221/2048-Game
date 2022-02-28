@@ -1,4 +1,4 @@
-#include "game/FPSDisplay.hpp"
+#include "Game/FPSDisplay.hpp"
 
 FPSDisplay::FPSDisplay()
 {

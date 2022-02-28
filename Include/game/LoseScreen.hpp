@@ -3,8 +3,8 @@
 #ifndef LOSESCREEN_HPP
 #define LOSESCREEN_HPP
 
-#include "gfx/Sprite.hpp"
-#include "gfx/Text/Text.hpp"
+#include "Core/Gfx/Sprite.hpp"
+#include "Core/Text/Text.hpp"
 
 class LoseScreen
 {

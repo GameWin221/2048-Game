@@ -1,4 +1,4 @@
-#include "game/LoseScreen.hpp"
+#include "Game/LoseScreen.hpp"
 
 Texture* loseScreenTexture = nullptr;
 Texture* spriteBGTexture   = nullptr;

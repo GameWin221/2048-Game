@@ -1,4 +1,4 @@
-#include "gfx/Window.hpp"
+#include "Core/Gfx/Window.hpp"
 
 Window::Window(glm::uvec2 size, std::string name)
 {

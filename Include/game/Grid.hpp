@@ -3,9 +3,9 @@
 #ifndef GRID_HPP
 #define GRID_HPP
 
-#include "game/Block.hpp"
-#include "game/Direction.hpp"
-#include "game/ScoreDisplay.hpp"
+#include "Game/Block.hpp"
+#include "Core/Direction.hpp"
+#include "Game/ScoreDisplay.hpp"
 
 #include <thread>
 #include <vector>

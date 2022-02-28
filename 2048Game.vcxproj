@@ -151,27 +151,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source\menu\GridSizeButton.cpp" />
-    <ClCompile Include="Source\menu\Menu.cpp" />
-    <ClCompile Include="Source\game\GameLoader.cpp" />
-    <ClCompile Include="Source\game\LoseScreen.cpp" />
-    <ClCompile Include="Source\game\Button\Button.cpp" />
-    <ClCompile Include="Source\game\Button\RestartButton.cpp" />
-    <ClCompile Include="Source\game\ScoreDisplay.cpp" />
-    <ClCompile Include="Source\gfx\Framebuffer.cpp" />
-    <ClCompile Include="Source\gfx\Text\Font.cpp" />
+    <ClCompile Include="Source\Menu\GridSizeButton.cpp" />
+    <ClCompile Include="Source\Menu\Menu.cpp" />
+    <ClCompile Include="Source\Game\GameLoader.cpp" />
+    <ClCompile Include="Source\Game\LoseScreen.cpp" />
+    <ClCompile Include="Source\Core\Button.cpp" />
+    <ClCompile Include="Source\Game\RestartButton.cpp" />
+    <ClCompile Include="Source\Game\ScoreDisplay.cpp" />
+    <ClCompile Include="Source\Core\Framebuffer.cpp" />
+    <ClCompile Include="Source\Core\Text\Font.cpp" />
     <ClCompile Include="External\STB\stb_image.cpp" />
-    <ClCompile Include="Source\game\Block.cpp" />
-    <ClCompile Include="Source\game\FPSDisplay.cpp" />
-    <ClCompile Include="Source\game\GameLoop.cpp" />
-    <ClCompile Include="Source\game\Grid.cpp" />
-    <ClCompile Include="Source\game\Input.cpp" />
+    <ClCompile Include="Source\Game\Block.cpp" />
+    <ClCompile Include="Source\Game\FPSDisplay.cpp" />
+    <ClCompile Include="Source\Game\GameLoop.cpp" />
+    <ClCompile Include="Source\Game\Grid.cpp" />
+    <ClCompile Include="Source\Core\Input.cpp" />
     <ClCompile Include="Source\main.cpp" />
-    <ClCompile Include="Source\gfx\Shader.cpp" />
-    <ClCompile Include="Source\gfx\Sprite.cpp" />
-    <ClCompile Include="Source\gfx\Text\Text.cpp" />
-    <ClCompile Include="Source\gfx\Texture.cpp" />
-    <ClCompile Include="Source\gfx\Window.cpp" />
+    <ClCompile Include="Source\Core\Shader.cpp" />
+    <ClCompile Include="Source\Core\Sprite.cpp" />
+    <ClCompile Include="Source\Core\Text\Text.cpp" />
+    <ClCompile Include="Source\Core\Texture.cpp" />
+    <ClCompile Include="Source\Core\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\fragment.glsl" />
@@ -180,26 +180,26 @@
     <None Include="Shaders\vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\menu\GridSizeButton.hpp" />
-    <ClInclude Include="Include\game\Button\Button.hpp" />
-    <ClInclude Include="Include\game\Button\RestartButton.hpp" />
-    <ClInclude Include="Include\game\GameLoader.hpp" />
-    <ClInclude Include="Include\game\ScoreDisplay.hpp" />
-    <ClInclude Include="Include\gfx\Framebuffer.hpp" />
-    <ClInclude Include="Include\gfx\Text\Font.hpp" />
-    <ClInclude Include="Include\game\Block.hpp" />
-    <ClInclude Include="Include\game\Direction.hpp" />
-    <ClInclude Include="Include\game\FPSDisplay.hpp" />
-    <ClInclude Include="Include\game\GameLoop.hpp" />
-    <ClInclude Include="Include\game\Grid.hpp" />
-    <ClInclude Include="Include\game\Input.hpp" />
-    <ClInclude Include="Include\gfx\Shader.hpp" />
-    <ClInclude Include="Include\gfx\Sprite.hpp" />
-    <ClInclude Include="Include\gfx\Text\Text.hpp" />
-    <ClInclude Include="Include\gfx\Texture.hpp" />
-    <ClInclude Include="Include\gfx\Window.hpp" />
-    <ClInclude Include="Include\game\LoseScreen.hpp" />
-    <ClInclude Include="Include\menu\Menu.hpp" />
+    <ClInclude Include="Include\Menu\GridSizeButton.hpp" />
+    <ClInclude Include="Include\Core\Button.hpp" />
+    <ClInclude Include="Include\Game\RestartButton.hpp" />
+    <ClInclude Include="Include\Game\GameLoader.hpp" />
+    <ClInclude Include="Include\Game\ScoreDisplay.hpp" />
+    <ClInclude Include="Include\Core\Gfx\Framebuffer.hpp" />
+    <ClInclude Include="Include\Core\Text\Font.hpp" />
+    <ClInclude Include="Include\Game\Block.hpp" />
+    <ClInclude Include="Include\Core\Direction.hpp" />
+    <ClInclude Include="Include\Game\FPSDisplay.hpp" />
+    <ClInclude Include="Include\Game\GameLoop.hpp" />
+    <ClInclude Include="Include\Game\Grid.hpp" />
+    <ClInclude Include="Include\Core\Input.hpp" />
+    <ClInclude Include="Include\Core\Gfx\Shader.hpp" />
+    <ClInclude Include="Include\Core\Gfx\Sprite.hpp" />
+    <ClInclude Include="Include\Core\Text\Text.hpp" />
+    <ClInclude Include="Include\Core\Gfx\Texture.hpp" />
+    <ClInclude Include="Include\Core\Gfx\Window.hpp" />
+    <ClInclude Include="Include\Game\LoseScreen.hpp" />
+    <ClInclude Include="Include\Menu\Menu.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

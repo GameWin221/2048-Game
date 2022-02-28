@@ -1,9 +1,9 @@
 // TODO
 // Linux support (Makefile)
-// Improve the menu
+// Improve the Menu
 
-#include "game/GameLoop.hpp"
-#include "menu/Menu.hpp"
+#include "Game/GameLoop.hpp"
+#include "Menu/Menu.hpp"
 
 #ifdef _WIN32
 #define NOMINMAX

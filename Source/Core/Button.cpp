@@ -1,4 +1,4 @@
-#include "game/Button/Button.hpp"
+#include "Core/Button.hpp"
 
 Button::Button(){} // For inheritance
 Button::Button(Sprite* buttonSprite)

@@ -1,4 +1,4 @@
-#include "gfx/Sprite.hpp"
+#include "Core/Gfx/Sprite.hpp"
 
 const float vertices[8] = {
     -1.0f, -1.0f,

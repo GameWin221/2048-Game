@@ -3,7 +3,7 @@
 #ifndef FPSDISPLAY_HPP
 #define FPSDISPLAY_HPP
 
-#include "gfx/Text/Text.hpp"
+#include "Core/Text/Text.hpp"
 
 #include <chrono>
 

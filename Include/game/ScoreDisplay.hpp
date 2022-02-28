@@ -3,8 +3,8 @@
 #ifndef SCOREDISPLAY_HPP
 #define SCOREDISPLAY_HPP
 
-#include "gfx/Text/Text.hpp"
-#include "gfx/Sprite.hpp"
+#include "Core/Text/Text.hpp"
+#include "Core/Gfx/Sprite.hpp"
 #include <fstream>
 
 class ScoreDisplay

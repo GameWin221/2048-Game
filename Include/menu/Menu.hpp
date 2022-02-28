@@ -3,16 +3,16 @@
 #ifndef MENU_HPP
 #define MENU_HPP
 
-#include "gfx/Window.hpp"
-#include "gfx/Shader.hpp"
-#include "gfx/Texture.hpp"
-#include "gfx/Sprite.hpp"
+#include "Core/Gfx/Window.hpp"
+#include "Core/Gfx/Shader.hpp"
+#include "Core/Gfx/Texture.hpp"
+#include "Core/Gfx/Sprite.hpp"
 
-#include "gfx/Text/Text.hpp"
-#include "gfx/Text/Font.hpp"
+#include "Core/Text/Text.hpp"
+#include "Core/Text/Font.hpp"
 
-#include "game/Button/Button.hpp"
-#include "menu/GridSizeButton.hpp"
+#include "Core/Button.hpp"
+#include "Menu/GridSizeButton.hpp"
 
 namespace Menu
 {

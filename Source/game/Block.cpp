@@ -1,4 +1,4 @@
-#include "game/Block.hpp"
+#include "Game/Block.hpp"
 
 Texture* blockTexture = nullptr;
 Texture* blurTexture = nullptr;

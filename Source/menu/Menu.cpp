@@ -1,4 +1,4 @@
-#include "menu/Menu.hpp"
+#include "Menu/Menu.hpp"
 
 namespace Menu
 {

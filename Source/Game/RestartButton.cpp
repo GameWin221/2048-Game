@@ -1,4 +1,4 @@
-#include "game/Button/RestartButton.hpp"
+#include "Game/RestartButton.hpp"
 
 Texture* restartTexture = nullptr;
 Texture* buttonBlurTexture = nullptr;

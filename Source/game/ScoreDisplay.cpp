@@ -1,4 +1,4 @@
-#include "game/ScoreDisplay.hpp"
+#include "Game/ScoreDisplay.hpp"
 
 Texture* bgTexture;
 

@@ -1,4 +1,4 @@
-#include "gfx/Texture.hpp"
+#include "Core/Gfx/Texture.hpp"
 
 void Texture::Use(unsigned int textureID)
 {

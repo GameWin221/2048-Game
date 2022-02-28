@@ -12,8 +12,8 @@
 #include <iostream>
 #include <vector>
 
-#include "gfx/Shader.hpp"
-#include "gfx/Text/Font.hpp"
+#include "Core/Gfx/Shader.hpp"
+#include "Core/Text/Font.hpp"
 
 struct point {
 	GLfloat x;
