@@ -12,6 +12,7 @@ class RestartButton : public Button
 {
 private:
 	glm::vec3 glowColor;
+	glm::vec3 glowHighlightedColor;
 
 	Sprite* blur;
 
@@ -30,6 +31,8 @@ public:
 
 	void SetGlow(bool glow);
 
+	virtual void OnHover();
+	virtual void OnIdle();
 	virtual void OnPress();
 };
 

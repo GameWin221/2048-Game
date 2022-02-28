@@ -6,8 +6,9 @@ Texture* buttonBlurTexture = nullptr;
 RestartButton::RestartButton(Grid* mainGrid, ScoreDisplay* mainScoreDisplay)
 {
 	this->defaultColor = glm::vec3(0.5f, 0.45f, 0.45f);
-	this->highlightedColor = glm::vec3(0.5f);
+	this->highlightedColor = this->defaultColor * 0.8f;
 	this->glowColor = glm::vec3(247, 154, 32)/255.0f;
+	this->glowHighlightedColor = this->glowColor * 0.8f;
 
 	this->grid = mainGrid;
 	this->score = mainScoreDisplay;
@@ -51,6 +52,21 @@ void RestartButton::SetGlow(bool glow)
 		this->sprite->color = this->defaultColor;
 }
 
+
+void RestartButton::OnHover()
+{
+	if (this->sprite->color != this->glowColor && this->sprite->color != this->glowHighlightedColor)
+		this->sprite->color = this->highlightedColor;
+	else
+		this->sprite->color = this->glowHighlightedColor;
+}
+void RestartButton::OnIdle()
+{
+	if (this->sprite->color != this->glowColor && this->sprite->color != this->glowHighlightedColor)
+		this->sprite->color = this->defaultColor;
+	else
+		this->sprite->color = this->glowColor;
+}
 void RestartButton::OnPress()
 {
 	this->grid->Reset();
@@ -60,7 +76,7 @@ void RestartButton::OnPress()
 
 void RestartButton::Render()
 {
-	if (this->sprite->color == this->glowColor)
+	if (this->sprite->color == this->glowColor || this->sprite->color == this->glowHighlightedColor)
 		this->blur->Render();
 
 	this->sprite->Render();

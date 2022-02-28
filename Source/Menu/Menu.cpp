@@ -14,11 +14,11 @@ namespace Menu
 	Sprite* topPanel;
 	
 	GridSizeButton* button2 ;
+	GridSizeButton* button3 ;
 	GridSizeButton* button4 ;
 	GridSizeButton* button6 ;
-	GridSizeButton* button8 ;
-	GridSizeButton* button12;
-	GridSizeButton* button16;
+	GridSizeButton* button8;
+	GridSizeButton* button14;
 	GridSizeButton* button20;
 	GridSizeButton* button24;
 	GridSizeButton* button32;
@@ -60,11 +60,11 @@ namespace Menu
 		chooseText->centered = true;
 
 		button2  = new GridSizeButton(glm::vec2(150, 610), 2 );
-		button4  = new GridSizeButton(glm::vec2(450, 610), 4 );
-		button6  = new GridSizeButton(glm::vec2(750, 610), 6 );
-		button8  = new GridSizeButton(glm::vec2(150, 380), 8 );
-		button12 = new GridSizeButton(glm::vec2(450, 380), 12);
-		button16 = new GridSizeButton(glm::vec2(750, 380), 16);
+		button3  = new GridSizeButton(glm::vec2(450, 610), 3 );
+		button4  = new GridSizeButton(glm::vec2(750, 610), 4 );
+		button6  = new GridSizeButton(glm::vec2(150, 380), 6 );
+		button8  = new GridSizeButton(glm::vec2(450, 380), 8 );
+		button14 = new GridSizeButton(glm::vec2(750, 380), 14);
 		button20 = new GridSizeButton(glm::vec2(150, 150), 20);
 		button24 = new GridSizeButton(glm::vec2(450, 150), 24);
 		button32 = new GridSizeButton(glm::vec2(750, 150), 32);
@@ -73,12 +73,12 @@ namespace Menu
 	{
 		menuWindow->PollEvents();
 
-		button2	->CheckPress();
-		button4	->CheckPress();
-		button6	->CheckPress();
-		button8	->CheckPress();
-		button12->CheckPress();
-		button16->CheckPress();
+		button2 ->CheckPress();
+		button3 ->CheckPress();
+		button4 ->CheckPress();
+		button6 ->CheckPress();
+		button8 ->CheckPress();
+		button14->CheckPress();
 		button20->CheckPress();
 		button24->CheckPress();
 		button32->CheckPress();
@@ -96,26 +96,25 @@ namespace Menu
 
 		Sprite::InitInstancing();
 		button2 ->Render();
+		button3 ->Render();
 		button4 ->Render();
 		button6 ->Render();
 		button8 ->Render();
-		button12->Render();
-		button16->Render();
+		button14->Render();
 		button20->Render();
 		button24->Render();
 		button32->Render();
 
 		Text::InitInstancing();
 		button2 ->RenderText();
+		button3 ->RenderText();
 		button4 ->RenderText();
 		button6 ->RenderText();
 		button8 ->RenderText();
-		button12->RenderText();
-		button16->RenderText();
+		button14->RenderText();
 		button20->RenderText();
 		button24->RenderText();
 		button32->RenderText();
-
 
 		Sprite::InitInstancing();
 		vignette->Render();
@@ -131,12 +130,12 @@ namespace Menu
 		delete chooseText;
 		delete topPanelTexture;
 		delete topPanel;
-		delete button2;
-		delete button4;
-		delete button6;
-		delete button8;
-		delete button12;
-		delete button16;
+		delete button2 ;
+		delete button3 ;
+		delete button4 ;
+		delete button6 ;
+		delete button8 ;
+		delete button14;
 		delete button20;
 		delete button24;
 		delete button32;

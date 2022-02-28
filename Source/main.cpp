@@ -1,6 +1,5 @@
 // TODO
 // Linux support (Makefile)
-// Improve the Menu
 
 #include "Game/GameLoop.hpp"
 #include "Menu/Menu.hpp"

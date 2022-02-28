@@ -10,9 +10,10 @@ Button::Button(Sprite* buttonSprite)
 	this->highlightedColor = glm::vec3(0.8f);
 }
 
-void Button::OnPress()
-{
-}
+// Mostly for inheritance
+void Button::OnPress(){}
+void Button::OnHover(){}
+void Button::OnIdle(){}
 
 void Button::CheckPress()
 {
@@ -31,6 +32,14 @@ void Button::CheckPress()
 	glm::vec2 distToCenter = this->sprite->position - glm::vec2(mX, mY);
 	distToCenter.x = abs(distToCenter.x);
 	distToCenter.y = abs(distToCenter.y);
+
+	if (distToCenter.x < this->sprite->size.x &&
+		distToCenter.y < this->sprite->size.y)
+	{
+		this->OnHover();
+	}
+	else
+		this->OnIdle();
 
 	if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{

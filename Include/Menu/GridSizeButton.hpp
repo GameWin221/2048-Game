@@ -21,6 +21,8 @@ public:
 
 	void RenderText();
 
+	virtual void OnHover();
+	virtual void OnIdle();
 	virtual void OnPress();
 };
 
