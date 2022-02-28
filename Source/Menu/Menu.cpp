@@ -44,18 +44,18 @@ namespace Menu
 		topPanelTexture = new Texture("Resources/Textures/BGWide.png");
 		topPanel = new Sprite(topPanelTexture);
 		topPanel->position = glm::vec2(450, 884);
-		topPanel->color = glm::vec3(0.4);
+		topPanel->color = glm::vec3(0.4f);
 		topPanel->size = glm::vec2(440, 140);
 
 		titleText  = new Text(Font::DefaultFont(), "2048");
 		titleText->position = glm::vec2(450, 940);
-		titleText->color = glm::vec3(0.2);
+		titleText->color = glm::vec3(0.2f);
 		titleText->scale = 1.2f;
 		titleText->centered = true;
 
 		chooseText = new Text(Font::DefaultFont(), "Choose the grid's size:");
 		chooseText->position = glm::vec2(450, 820);
-		chooseText->color = glm::vec3(0.2);
+		chooseText->color = glm::vec3(0.2f);
 		chooseText->scale = 0.65f;
 		chooseText->centered = true;
 

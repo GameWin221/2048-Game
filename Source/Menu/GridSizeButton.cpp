@@ -9,7 +9,7 @@ GridSizeButton::GridSizeButton(glm::vec2 buttonPosition, const int gSize)
 
 	this->sprite = new Sprite(gridButtonTexture);
 	this->sprite->position = buttonPosition;
-	this->sprite->color = glm::vec3(0.4);
+	this->sprite->color = glm::vec3(0.4f);
 	this->sprite->size = glm::vec2(110);
 
 	this->gridSize = gSize;
@@ -20,7 +20,7 @@ GridSizeButton::GridSizeButton(glm::vec2 buttonPosition, const int gSize)
 
 	this->gridSizeText->position = this->sprite->position;
 	this->gridSizeText->scale = 0.5f;
-	this->gridSizeText->color = glm::vec3(0.2);
+	this->gridSizeText->color = glm::vec3(0.2f);
 	this->gridSizeText->centered = true;
 }
 

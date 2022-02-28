@@ -7,7 +7,6 @@
 #include "Core/Gfx/Shader.hpp"
 #include "Core/Gfx/Texture.hpp"
 #include "Core/Gfx/Sprite.hpp"
-#include "Core/Gfx/Framebuffer.hpp"
 
 #include "Core/Text/Text.hpp"
 #include "Core/Text/Font.hpp"

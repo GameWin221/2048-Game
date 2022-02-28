@@ -64,7 +64,7 @@ namespace Input
 				return true;
 			else return false;
 			break;
-		default: break;
+		default: return false; break;
 		}
 	}
 

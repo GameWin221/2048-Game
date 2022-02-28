@@ -41,7 +41,7 @@ ScoreDisplay::ScoreDisplay(const int& gridSize)
 	this->scoreBG = new Sprite(bgTexture);
 	this->scoreBG->position = position;
 	this->scoreBG->size = glm::vec2((float)wX / 6.0f, 60);
-	this->scoreBG->color = glm::vec3(0.4);
+	this->scoreBG->color = glm::vec3(0.4f);
 
 	// ### SCORE TEXT ###
 	this->scoreText = new Text(Font::DefaultFont(), "Score:");
@@ -74,7 +74,7 @@ ScoreDisplay::ScoreDisplay(const int& gridSize)
 	// ### BEST SCORE VALUE ###
 	this->bestScoreValueText = new Text(Font::DefaultFont(), std::to_string(this->bestScore));
 	this->bestScoreValueText->position = this->bestScoreBG->position - glm::vec2(0, 20);
-	this->bestScoreValueText->color = glm::vec3(0.2);
+	this->bestScoreValueText->color = glm::vec3(0.2f);
 	this->bestScoreValueText->scale = 0.5f;
 	this->bestScoreValueText->centered = true;
 }

@@ -40,7 +40,7 @@ bool Grid::CanMergeAnyBlock()
 			{
 				// If the checked block is within one block distance (not diagonally) to the block
 				const glm::vec2 diff = block.targetGridPos - checkedBlock.targetGridPos;
-				const int diffSum = abs(diff.x) + abs(diff.y);
+				const int diffSum = static_cast<int>(abs(diff.x)) + static_cast<int>(abs(diff.y));
 				if (diffSum == 1 && checkedBlock.value == block.value)
 					return true;
 			}
@@ -145,7 +145,7 @@ Grid::Grid(unsigned int size)
 	this->blockMoveSpeed = 2600.0f * (wX / 900.0f); // Scale the block movement speed relatively to the window size
 }
 
-#define PI 3.1415926
+#define PI 3.1415926f
 
 // 0.0f - 0.999f
 #define Smoothing 0.75f
